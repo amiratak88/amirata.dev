@@ -1,15 +1,28 @@
 {
-  "name": "amirata.dev",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "9.5.3",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  }
+	"name": "amirata.dev",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	},
+	"dependencies": {
+		"@mdx-js/loader": "^1.6.22",
+		"@mdx-js/react": "^1.6.22",
+		"@next/mdx": "^10.0.3",
+		"next": "^10.0.3",
+		"next-compose-plugins": "^2.2.1",
+		"postcss": "^8.1.10",
+		"prism-react-renderer": "^1.1.1",
+		"react": "16.13.1",
+		"react-dom": "16.13.1",
+		"tailwindcss": "^2.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "^14.11.1",
+		"@types/react": "^16.9.49",
+		"@types/react-dom": "^16.9.8",
+		"typescript": "^4.0.2"
+	}
 }
