@@ -16,7 +16,7 @@ const blogs: Omit<Parameters<typeof BlogPreview>[0], 'children'>[] = [
 	}
 ];
 
-const Blog: React.FC = () => {
+const Blog = () => {
 	return (
 		<Page title="Blog - Amirata">
 			<div

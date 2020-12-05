@@ -8,11 +8,10 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"@mdx-js/loader": "^1.6.22",
 		"@mdx-js/react": "^1.6.22",
-		"@next/mdx": "^10.0.3",
 		"next": "^10.0.3",
 		"next-compose-plugins": "^2.2.1",
+		"next-mdx-enhanced": "^5.0.0",
 		"postcss": "^8.1.10",
 		"prism-react-renderer": "^1.1.1",
 		"react": "16.13.1",

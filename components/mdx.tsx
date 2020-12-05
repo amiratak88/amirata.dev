@@ -1,12 +1,8 @@
 import * as React from 'react';
-import {
-	MDXProvider as OriginalMDXProvider,
-	MDXProviderProps,
-	Components as MDXComponents
-} from '@mdx-js/react';
+import { MDXProvider as OriginalMDXProvider, Components as MDXComponents } from '@mdx-js/react';
 import CodeBlock from 'components/CodeBlock';
 
-const H1: React.FC = ({ children }) => (
+export const H1: React.FC = ({ children }) => (
 	<h1 className="text-4xl font-extrabold text-indigo-400 mb-4">{children}</h1>
 );
 const H2: React.FC = ({ children }) => (
