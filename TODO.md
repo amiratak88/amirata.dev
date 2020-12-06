@@ -1,4 +1,13 @@
-- reading-time
-- editedAt
 - contact
 - about
+- footer
+- reading-time
+- editedAt
+- switch to next-mdx-remote
+- callout component (possibly scan for !!! or at the very least use shortcodes to avoid importing the component)
+- from blog post page
+  - go back to index page
+  - go to next blog
+- code block indentaion (switch between 2 and 4)
+- search
+- SEO (research)
