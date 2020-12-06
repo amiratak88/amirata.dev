@@ -12,3 +12,6 @@
 - search
 - SEO (research)
 - code block copy (additional lines)
+- tailwind purge
+- connect domain
+- fix date on safari
