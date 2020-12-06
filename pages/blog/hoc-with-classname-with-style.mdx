@@ -1,0 +1,116 @@
+---
+title: Using Higher Order Components and Render Highjacking to Inject Props to Children
+intro: In this post, I talk about how I built two HOCs (higher order components) "withClassName" and "withStyle" to help me build more composeable React components
+publishedAt: 2020-12-06
+---
+
+In this post, we are going to learn how to build two HOCs (higher order components) `withClassName` and `withStyle` which use render highjacking to manipulate the wrapped components's children's props.
+
+Take a look at the code for this simple Button component:
+
+```tsx
+type Props = {
+	text: string;
+	onClick: () => void;
+};
+
+const Button: React.FC<Props> = ({ children, text, onClick }) => {
+	return <button className="p-3 rounded-md">{children}</button>;
+};
+```
+
+Now let's say we are trying to build another component called `BlueButton` and we want to reuse our existing `Button` component to accomplish that. In order to do that, let's make our Button accept a **className** prop and pass in the appropriate class names to make this button blue.
+
+```tsx
+type Props = {
+	text: string;
+	onClick: () => void;
+	className?: string;
+};
+
+const Button: React.FC<Props> = ({ children, text, onClick, className }) => {
+	const originalClassName = 'p-3 rounded-md';
+	const finalClassName = className ? `${originalClassName} ${className}`;
+	return <button className="p-3 rounded-md">{children}</button>;
+};
+```
+
+We can now build our `BlueButton` component:
+
+```tsx
+type Props = {
+	text: string;
+	onClick: () => void;
+};
+
+const BlueButton: React.FC<Props> = (props) => (
+	<Button {...props} className="bg-blue-700 text-gray-300" />
+);
+```
+
+That was a lot of typing. I've found this to be a recurring pattern when developing react applications. Especially for things like `margin` which in my opinion are not worth making them their own prop and they just make our code messy. So I wrote a little utility function that can do this for me. Let's take a look at the code:
+
+```tsx
+// "W" is the wrapped component and "E" is the enhanced component (what we are returning)
+const withClassName = <T extends { [x: string]: any }>(W: React.FC<T>) => {
+	const E: React.FC<T & { className?: string }> = ({ className, ...wrappedProps }) => {
+		const elementsTree = W(wrappedProps as T);
+		if (!elementsTree) return null;
+		if (!className) return elementsTree;
+
+		const newClassName = elementsTree.props.className
+			? `${elementsTree.props.className} ${className}`
+			: className;
+
+		return React.cloneElement(
+			elementsTree,
+			{ ...elementsTree.props, className: newClassName },
+			elementsTree.props.children
+		);
+	};
+
+	return E;
+};
+```
+
+I've used `React.cloneElement` API to inject my **className** props to the **elementsTree** resulted by rendering the wrapped component. What I like most about this is that it's type-safe which makes the composed component accept all the wrapped component's props plus the additional **className** prop. I'm accepting wrapped props as a generic type parameter **T** and returning a function component of type `React.FC<T & { className?: string; }`. Now we can build our BlueButton component without touching the Button component.
+
+```tsx
+import withClassName from 'utils/withClassName';
+import _Button from 'components/Button';
+const Button = withClassName(_Button);
+
+type Props = {
+	text: string;
+	onClick: () => void;
+};
+
+const BlueButton: React.FC<Props> = (props) => (
+	<Button {...props} className="bg-blue-700 text-gray-300" />
+);
+```
+
+How clean is that?! 😅
+
+We can do something similar for the `style` prop. Check out the snippet below:
+
+```tsx
+// "W" is the wrapped component and "E" is the enhanced component (what we are returning)
+const withStyle = <T extends { [x: string]: any }>(W: React.FC<T>) => {
+	const E: React.FC<T & { style?: React.CSSProperties }> = ({ style, ...wrappedProps }) => {
+		const elementsTree = W(wrappedProps as T);
+		if (!elementsTree) return null;
+		if (!style) return elementsTree;
+
+		return React.cloneElement(
+			elementsTree,
+			{ ...elementsTree.props, style: { ...elementsTree.props.style, ...style } },
+			elementsTree.props.children
+		);
+	};
+
+	return E;
+};
+```
+
+If you have never written you own HOC, hope this post inspires you to write one if you find a nice usecase for one. It's wroth mentioning that I have only recently started using `React.cloneElement` and not sure if this has any performance downsides, so use it at your own risk.

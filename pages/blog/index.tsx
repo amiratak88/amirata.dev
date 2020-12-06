@@ -13,7 +13,6 @@ type Props = {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-	console.log(frontMatter);
 	const blogs = frontMatter
 		.map((matter) => {
 			return {
@@ -32,7 +31,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 };
 
 const Blog = ({ blogs }: Props) => {
-	console.log({ blogs });
 	return (
 		<Page title="Recent Blogs - Amirata">
 			<div

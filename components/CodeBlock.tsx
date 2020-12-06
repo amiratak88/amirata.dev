@@ -8,7 +8,7 @@ const CodeBlock: React.FC<{ children: string; className: string }> = ({ children
 	const numberColumnWidth = trimmedChildren.split(/\n/).length.toString().length;
 
 	return (
-		<div className="bg-black rounded-lg p-3 overflow-hidden">
+		<div className="bg-black rounded-lg p-3 overflow-hidden mb-7">
 			<Highlight
 				{...defaultProps}
 				theme={theme}
@@ -20,12 +20,11 @@ const CodeBlock: React.FC<{ children: string; className: string }> = ({ children
 						{tokens.map((line, i) => (
 							<div {...getLineProps({ line, key: i })}>
 								<span
-									className="text-gray-700 text-right inline-block"
+									className="text-gray-700 text-right inline-block mr-4 select-none"
 									style={{ width: `${numberColumnWidth}ch` }}
 								>
 									{i + 1}
 								</span>
-								{'   '}
 								{line.map((token, key) => (
 									<span {...getTokenProps({ token, key })} />
 								))}

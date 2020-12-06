@@ -11,3 +11,4 @@
 - code block indentaion (switch between 2 and 4)
 - search
 - SEO (research)
+- code block copy (additional lines)

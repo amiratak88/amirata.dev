@@ -18,6 +18,14 @@ const H5: React.FC = ({ children }) => (
 	<h5 className="text-lg font-extrabold text-indigo-400 mb-4">{children}</h5>
 );
 const P: React.FC = ({ children }) => <p className="text-lg mb-7 leading-8">{children}</p>;
+const InlineCode: React.FC = ({ children }) => (
+	<code
+		className="rounded-md px-1 mx-1 font-mono text-base"
+		style={{ backgroundColor: '#d7b34829', color: '#ffef00d6', border: '2px solid #d7b348bd' }}
+	>
+		{children}
+	</code>
+);
 
 const mdxComponents: MDXComponents = {
 	h1: H1,
@@ -26,7 +34,8 @@ const mdxComponents: MDXComponents = {
 	h4: H4,
 	h5: H5,
 	code: CodeBlock,
-	p: P
+	p: P,
+	inlineCode: InlineCode
 };
 
 export const MDXProvider: React.FC = ({ children }) => {
