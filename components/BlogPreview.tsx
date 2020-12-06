@@ -19,10 +19,10 @@ const BlogPreview: React.FC<BlogPreviewProps> = ({ title, text, slug, publishedA
 	return (
 		<div>
 			<div className="flex items-baseline mb-2">
-				<h2 className="text-indigo-400 text-xl font-semibold">
+				<h2 className="text-indigo-400 text-xl font-semibold hover:underline">
 					<Link href={`/blog/${slug}`}>{title}</Link>
 				</h2>
-				<p className="text-gray-500 text-sm ml-auto">{formattedPublishedAt}</p>
+				<p className="text-gray-500 text-sm ml-auto whitespace-nowrap">{formattedPublishedAt}</p>
 			</div>
 			<p>{text}</p>
 		</div>

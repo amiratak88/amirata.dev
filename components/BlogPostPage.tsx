@@ -1,5 +1,6 @@
 import Page, { PageProps } from 'components/Page';
 import { MDXProvider, H1 } from 'components/mdx';
+import ReadingContainer from 'components/ReadingContainer';
 
 type BlogPostPageProps = PageProps & { frontMatter: BlogFrontMatterWithDate };
 
@@ -14,11 +15,11 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({
 
 	return (
 		<Page title={`${title} - Blog - Amirata`}>
-			<div className="w-full mx-auto pb-20 px-3" style={{ maxWidth: '80ch' /* three alphabets */ }}>
+			<ReadingContainer>
 				<p className="text-gray-500 text-sm text-right">{publishedAtText}</p>
 				<H1>{title}</H1>
 				<MDXProvider>{children}</MDXProvider>
-			</div>
+			</ReadingContainer>
 		</Page>
 	);
 };

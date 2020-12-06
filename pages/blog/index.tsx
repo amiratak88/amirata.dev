@@ -2,6 +2,7 @@ import Page from 'components/Page';
 import BlogPreview from 'components/BlogPreview';
 import { frontMatter } from './*.mdx';
 import { GetStaticProps } from 'next';
+import ReadingContainer from 'components/ReadingContainer';
 
 type Props = {
 	blogs: {
@@ -33,10 +34,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 const Blog = ({ blogs }: Props) => {
 	return (
 		<Page title="Recent Blogs - Amirata">
-			<div
-				className="w-full mx-auto"
-				style={{ boxSizing: 'content-box', maxWidth: '78ch' /* three alphabets */ }}
-			>
+			<ReadingContainer>
 				<h1 className="text-3xl font-bold mb-12">Recent Blogs</h1>
 				<div className="space-y-8">
 					{blogs.map(({ title, intro, slug, publishedAt }) => (
@@ -49,7 +47,7 @@ const Blog = ({ blogs }: Props) => {
 						/>
 					))}
 				</div>
-			</div>
+			</ReadingContainer>
 		</Page>
 	);
 };
