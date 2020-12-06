@@ -1,5 +1,6 @@
 import Page, { PageProps } from 'components/Page';
-import { MDXProvider, H1 } from 'components/mdx';
+import { H1 } from 'components/mdx/other';
+import MDXProvider from 'components/mdx/Provider';
 import ReadingContainer from 'components/ReadingContainer';
 
 type BlogPostPageProps = PageProps & { frontMatter: BlogFrontMatterWithDate };
