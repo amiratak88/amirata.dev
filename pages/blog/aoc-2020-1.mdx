@@ -1,0 +1,94 @@
+---
+title: Advent of Code 2020 Day 1 Solution
+intro: TypeScript code plus explanation
+publishedAt: 2020-12-06
+---
+
+> Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. People use them as a speed contest, interview prep, company training, university coursework, practice problems, or to challenge each other. &mdash; [AdventOfCode.com](https://adventofcode.com/2020/about)
+
+For this puzzle, they've given us a list of numbers as input (one number on each line).
+
+## Part I
+
+**Problem:** Find the first two numbers that sum to **2020**. The answer is the multplication of these two numbers.
+
+**Solution:** We're going to iterate through the array and each time, caculate the difference between the current number and 2020. Then add the **difference** to a set that we have previously initialized if the **current number** doesn't exist in the set. However, if it does exist, it means that we have found our pair. Let's dive into the code:
+
+```ts
+const input = `
+1721
+979
+366
+299
+675
+1456
+`;
+
+const numbers = input
+	.trim()
+	.split('\n') // split on new line character
+	.map((str) => +str); // turn each string to a number so it'll be easier to work with
+
+const part1 = () => {
+	const seenDiffs: new Set<number>();
+
+	for (const number of numbers) {
+		if (number in seenDiffs) {
+			return (2020 - number) * number;
+		}
+
+		seenDiffs.add(2020 - number);
+	}
+
+	// answer not found
+	return null;
+};
+```
+
+**Complexity:** Our time complexity is _linear_ since we are only iterating the numbers array once and look-up and insert operations are done in constant time for sets. Worst case space complexity is also _linear_ because we are storing a whole copy of the array in the set.
+
+## Part II
+
+**Problem:** Find the first three numbers that sum to 2020. The answer is produced by multiplying these numbers together.
+
+**Solution:** A good place to start is to make a function that returns a pair of numbers or null for a given array and a target sum. Then we can iterate through the array and use this function to see if there's a pair that sums to our current difference. That was a handful but hopefully it will make more sense after looking at the code:
+
+```ts
+const getPairForSum = (numbers: number[], sum: number, skipIndex?: number) => {
+	const seenDiffs: new Set<number>();
+
+	for (const [index, number] of numbers.entries()) {
+		if (skipIndex === index) continue;
+		if (number in seenDiffs) {
+			return [sum - number, number];
+		}
+
+		seenDiffs.add(sum - number);
+	}
+
+	// answer not found
+	return null;
+};
+
+const part2 = () => {
+	for (const [index, number] of numbers.entries()) {
+		const pair = getPairForSum(numbers, 2020 - number, index);
+
+		if (pair) {
+			return number * pair[0] * pair[1];
+		}
+	}
+
+	return null;
+};
+```
+
+<Note>
+	Note that our `getPairForSum()` function is also accepting a `skipIndex` parameter so we don't
+	count the first number twice. For example for input `[1000, 20, 500, 1500]`, `1000 * 1000 * 20` is
+	not a valid output and our function should skip the second 1000. Alternatively we can pass a slice
+	of the array that doesn't contain the current number but that will cost us space-wise and
+	time-wise.
+</Note>
+
+**Complexity:** Time complexity is O(n^2) because we are doing a O(n) operation in each iteration (calling `getPairForSum()`). Space complexity is O(n) (linear) because we are doing a linear operation in each iteration and the space taken by each iteration frees up when we move on to the next iteration.

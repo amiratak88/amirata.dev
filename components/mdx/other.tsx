@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from 'next/link';
 
 export const H1: React.FC = ({ children }) => (
 	<h1 className="text-4xl font-extrabold text-indigo-400 mb-4">{children}</h1>
@@ -24,3 +25,17 @@ export const InlineCode: React.FC = ({ children }) => (
 		{children}
 	</code>
 );
+export const A: React.FC<{ href: string }> = ({ children, href }) => {
+	const isExternal = href.startsWith('http'); // TODO: this logic can be improved
+	const className = 'text-yellow-400 hover:underline';
+
+	return isExternal ? (
+		<a href={href} className={className} target="_blank">
+			{children}
+		</a>
+	) : (
+		<span className={className}>
+			<Link href={href}>{children}</Link>
+		</span>
+	);
+};

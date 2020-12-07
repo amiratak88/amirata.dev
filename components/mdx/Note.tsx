@@ -9,7 +9,7 @@ type Props = {
 
 const typeColorsMap: Record<NonNullable<Props['type']>, [string, string]> = {
 	success: ['#0d2726', '#00cc88'],
-	info: ['rgb(28, 53, 79', 'rgb(9, 125, 196)'],
+	info: ['rgb(28, 53, 79)', 'rgb(9, 125, 196)'],
 	warning: ['#272318', '#ff8000'],
 	danger: ['#271b18', '#ff0000']
 };
@@ -52,12 +52,26 @@ const transformChildren = (children: React.ReactNode): React.ReactNode => {
 	return children;
 };
 
-const Note: React.FC<Props> = ({ children, type = 'danger' }) => {
+const Note: React.FC<Props> = ({ children, type = 'info' }) => {
 	const [bgColor, borderColor] = typeColorsMap[type];
 	return (
 		<aside
-			className="p-6"
-			style={{ backgroundColor: bgColor, borderLeft: `5px solid ${borderColor}` }}
+			className="p-6 mb-7"
+			// style={{ backgroundColor: bgColor, borderLeft: `5px solid ${borderColor}` }}
+			// style={{
+			// 	backgroundColor: bgColor,
+			// 	borderWidth: '1px',
+			// 	borderLeftWidth: '5px',
+			// 	borderStyle: 'solid',
+			// 	borderColor,
+			// 	borderEndEndRadius: '20px',
+			// 	borderStartEndRadius: '20px'
+			// }}
+			style={{
+				backgroundColor: bgColor,
+				border: `1px solid ${borderColor}`,
+				borderRadius: '20px'
+			}}
 		>
 			<P style={{ marginBottom: 0 }}>{transformChildren(children)}</P>
 		</aside>

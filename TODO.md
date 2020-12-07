@@ -11,10 +11,22 @@
 - code block indentaion (switch between 2 and 4)
 - search
 - SEO (research)
-- code block copy (additional lines)
+- code block copy (additional lines) (swithing to a textarea element might work)
 - tailwind purge
 - connect domain
 - fix date on safari
 - Note component:
   - scan for !!!
   - interpolate \* and \*\*
+- tags
+- key prop in Note.tsx
+- Note icons
+- language label for code blocks
+
+# Blog Ideas
+
+- advent of code
+
+# Programming Ideas
+
+- tailwind config file completion
