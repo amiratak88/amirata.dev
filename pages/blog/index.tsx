@@ -1,6 +1,11 @@
 import Page from 'components/Page';
 import BlogPreview from 'components/BlogPreview';
-import { frontMatter } from './*.mdx';
+import matter from 'gray-matter';
+import fs from 'fs';
+import { promisify } from 'util';
+const readdir = promisify(fs.readdir);
+const readFile = promisify(fs.readFile);
+import path from 'path';
 import { GetStaticProps } from 'next';
 import ReadingContainer from 'components/ReadingContainer';
 
@@ -14,7 +19,17 @@ type Props = {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-	const blogs = frontMatter
+	const blogDirectory = path.join('pages', 'blog');
+	const paths = await readdir(blogDirectory);
+	const frontMatters = (await Promise.all(
+		paths
+			.filter((p) => /\.mdx$/.test(p))
+			.map(async (p) => ({ content: await readFile(path.join(blogDirectory, p), 'utf8'), path: p }))
+	).then((data) =>
+		data.map((d) => ({ ...matter(d.content).data, __resourcePath: d.path }))
+	)) as BlogFrontMatterWithDate[];
+
+	const blogs = frontMatters
 		.map((matter) => {
 			return {
 				title: matter.title,
