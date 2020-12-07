@@ -33,7 +33,7 @@ const part1 = () => {
 	const seenDiffs: new Set<number>();
 
 	for (const number of numbers) {
-		if (number in seenDiffs) {
+		if (seenDiffs.has(number)) {
 			return (2020 - number) * number;
 		}
 
@@ -59,7 +59,7 @@ const getPairForSum = (numbers: number[], sum: number, skipIndex?: number) => {
 
 	for (const [index, number] of numbers.entries()) {
 		if (skipIndex === index) continue;
-		if (number in seenDiffs) {
+		if (seenDiffs.has(number)) {
 			return [sum - number, number];
 		}
 
