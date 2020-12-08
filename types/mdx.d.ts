@@ -42,8 +42,8 @@ declare module '*.mdx' {
 
 type BlogFrontMatter = {
 	title: string;
-	publishedAt: string;
 	intro: string;
+	publishedAt: string;
 	__resourcePath: string;
 };
 

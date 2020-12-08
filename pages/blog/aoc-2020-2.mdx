@@ -1,0 +1,92 @@
+---
+title: Advent of Code 2020 Day 2 Solution
+intro: TypeScript code plus explanation
+publishedAt: 2020-12-07T20:03-0500
+---
+
+> Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. People use them as a speed contest, interview prep, company training, university coursework, practice problems, or to challenge each other. &mdash; [AdventOfCode.com](https://adventofcode.com/2020/about)
+
+For this puzzle we've been given a list of password policies and passwrods and we have to determine how many passwords are valid according to their corresponding policy.
+
+## Example Input
+
+```txt nonumber
+1-3 a: abcde
+1-3 b: cdefg
+2-9 c: cccccccccccc
+```
+
+## Part I
+
+The first and second number indicate the minimum and maximum number of times a letter must appear in the passwrod.
+
+This is pretty straight forward. For each line we should count how many times the given letter appeares in the password and then check if the count is between the two numbers. Let's take a look at the code:
+
+```ts
+const input = `
+1-3 a: abcde
+1-3 b: cdefg
+2-9 c: cccccccccccc
+`;
+
+const lines = input.trim().split('\n');
+
+let validCount = 0;
+
+for (const line of lines) {
+	// we can easily parse the line by using the character indices
+	// in the string, no need for fancy regex
+
+	const min = +line[0]; // the "+" symbol converts to number
+	const max = +line[2];
+	const letter = line[4];
+	const password = line.slice(7); // slice from the 7th index to the end of the string
+	const count = password.split('').reduce((acc, curr) => (curr === letter ? acc + 1 : acc), 0); // fancy way to count the character
+
+	// increment validCount if "count" is "valid" 😄
+	if (count >= min && count <= max) validCount++;
+}
+```
+
+If you're interested in how to parse each line using regex, check out this code snippet:
+
+```ts
+const match = line.match(/^(\d)-(\d) ([a-z]): ([a-z]+)$/);
+
+// This won't happen with the given input but have to do this to
+// satisfy TS. Alternatively we can put a "!" at the end of the
+// line where we declared "match", but I would rather handle
+// this case in the actual code
+if (!match) continue;
+
+// the first value in the match array is the whole matched string
+// and the rest are the captured groups
+const min = +match[1];
+const max = +match[2];
+const [, , , letter, password] = match;
+```
+
+**Complexity**: If we neglect the length of each password, this program will run in _linear_ time (because we're looping the array once and have no nested loops) and _constant_ space (since we're not copying anything).
+
+## Part II
+
+Determine how many passwords are valid if the two numbers describe the positions (1-based) that must contain the given character, for example, `2-9 c: cccccccccccc` is valid because the second and ninth character in the password are "c" but `1-3 a: abcde` is invalid because the thrid character in the password is not "a".
+
+```ts
+let validCount = 0;
+
+for (const line of lines) {
+	const match = line.match(/^(\d)-(\d) ([a-z]): ([a-z]+)$/);
+	if (!match) continue;
+
+	const firstIdx = +match[1] - 1; // Subtract 1 since arrays and strings are zero-based
+	const secondIdx = +match[2] - 1;
+	const [, , , letter, password] = match;
+
+	if (password[firstIdx] === letter && password[secondIdx] === letter) {
+		validCount++;
+	}
+}
+```
+
+**Complexity**: This script runs in _linear_ time because we have only one loop, and _constant_ space since we're not copying/storing anything.

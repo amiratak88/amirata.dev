@@ -22,6 +22,8 @@
 - key prop in Note.tsx
 - Note icons
 - language label for code blocks
+- Fix publishedAt date timezone
+- Use "@layer base" to apply base styles instead of creating components for each html tag
 
 # Blog Ideas
 

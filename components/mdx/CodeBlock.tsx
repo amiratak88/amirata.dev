@@ -2,7 +2,13 @@ import React from 'react';
 import Highlight, { defaultProps, Language as PrismLanguage } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/nightOwl';
 
-const CodeBlock: React.FC<{ children: string; className: string }> = ({ children, className }) => {
+type Props = {
+	children: string;
+	className: string;
+	nonumber?: boolean;
+};
+
+const CodeBlock: React.FC<Props> = ({ children, className, nonumber = false }) => {
 	const trimmedChildren = children.trim();
 	const language = className.replace(/language-/, '');
 	const numberColumnWidth = trimmedChildren.split(/\n/).length.toString().length;
@@ -19,12 +25,14 @@ const CodeBlock: React.FC<{ children: string; className: string }> = ({ children
 					<pre className={`${className} overflow-auto`}>
 						{tokens.map((line, i) => (
 							<div {...getLineProps({ line, key: i })}>
-								<span
-									className="text-gray-700 text-right inline-block mr-4 select-none"
-									style={{ width: `${numberColumnWidth}ch` }}
-								>
-									{i + 1}
-								</span>
+								{!nonumber && (
+									<span
+										className="text-gray-700 text-right inline-block mr-4 select-none"
+										style={{ width: `${numberColumnWidth}ch` }}
+									>
+										{i + 1}
+									</span>
+								)}
 								{line.map((token, key) => (
 									<span {...getTokenProps({ token, key })} />
 								))}

@@ -3,7 +3,7 @@ import { H1 } from 'components/mdx/other';
 import MDXProvider from 'components/mdx/Provider';
 import ReadingContainer from 'components/ReadingContainer';
 
-type BlogPostPageProps = PageProps & { frontMatter: BlogFrontMatterWithDate };
+type BlogPostPageProps = PageProps & { frontMatter: BlogFrontMatter };
 
 const BlogPostPage: React.FC<BlogPostPageProps> = ({
 	frontMatter: { title, publishedAt },
@@ -12,7 +12,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({
 	const publishedAtText = Intl.DateTimeFormat('en-US', {
 		// @ts-ignore
 		dateStyle: 'medium'
-	}).format(publishedAt);
+	}).format(new Date(publishedAt));
 
 	return (
 		<Page title={`${title} - Blog - Amirata`}>

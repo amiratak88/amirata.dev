@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 			.map(async (p) => ({ content: await readFile(path.join(blogDirectory, p), 'utf8'), path: p }))
 	).then((data) =>
 		data.map((d) => ({ ...matter(d.content).data, __resourcePath: d.path }))
-	)) as BlogFrontMatterWithDate[];
+	)) as BlogFrontMatter[];
 
 	const blogs = frontMatters
 		.map((matter) => {
