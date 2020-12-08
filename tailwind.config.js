@@ -3,13 +3,20 @@ module.exports = {
 		// removeDeprecatedGapUtilities: true,
 		// purgeLayersByDefault: true,
 	},
-	purge: [],
+	purge: ['./pages/**/*.tsx', './pages/**/*.mdx', './components/**/*.tsx'],
+	// purge: {
+	// 	enabled: true,
+	// 	content: ['./pages/**/*.tsx', './pages/**/*.mdx', './components/**/*.tsx']
+	// These options are passed through directly to PurgeCSS
+	// options: {
+	// 	safelist: ['bg-red-500', 'px-4'],
+	// }
+	// },
 	theme: {
 		extend: {
 			fontFamily: {
 				sans: [
 					'"IBM Plex Sans"',
-					'"Inter"',
 					'system-ui',
 					'-apple-system',
 					'BlinkMacSystemFont',

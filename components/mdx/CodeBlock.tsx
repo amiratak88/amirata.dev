@@ -22,7 +22,7 @@ const CodeBlock: React.FC<Props> = ({ children, className, nonumber = false }) =
 				language={language as PrismLanguage}
 			>
 				{({ className, tokens, getLineProps, getTokenProps }) => (
-					<pre className={`${className} overflow-auto`}>
+					<pre className={className + ' ' + 'overflow-auto'}>
 						{tokens.map((line, i) => (
 							<div {...getLineProps({ line, key: i })}>
 								{!nonumber && (
