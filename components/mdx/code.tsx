@@ -41,7 +41,8 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ children, className, nonum
 
 	const onCopyButtonClick: MouseEventHandler<HTMLButtonElement> = () => {
 		if (!ref.current) return;
-		const text = Array.from(ref.current?.childNodes)
+		const text = Array.from(ref.current?.children)
+			.filter((node) => node.className.includes('prism-line'))
 			.map((node) => node.lastChild?.textContent ?? '')
 			.join('\n');
 
@@ -70,7 +71,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ children, className, nonum
 					</div>
 					<CopyButton className="absolute top-3 right-3" onClick={onCopyButtonClick} />
 					{tokens.map((line, i) => (
-						<div {...getLineProps({ line, key: i })} className="table-row code-line">
+						<div {...getLineProps({ line, key: i })} className="prism-line table-row code-line">
 							{!nonumber && (
 								<span className="text-gray-700 table-cell text-right pr-4 select-none">
 									{i + 1}
