@@ -1,3 +1,4 @@
+- storybook
 - analytics
 - from blog post page
   - go back to index page
@@ -8,22 +9,22 @@
 - reading-time
 - editedAt
 - switch to next-mdx-remote
-- code block indentaion (switch between 2 and 4)
 - search
 - SEO (research)
-- code block copy (additional lines) (swithing to a textarea element might work)
-- tailwind purge
-- connect domain
 - fix date on safari
 - Note component:
   - scan for !!!
   - interpolate \* and \*\*
+  - key prop
+  - icons
 - tags
-- key prop in Note.tsx
-- Note icons
-- language label for code blocks
 - Fix publishedAt date timezone
-- Use "@layer base" to apply base styles instead of creating components for each html tag
+- code block:
+  - copy button
+  - indentaion (switch between 2 and 4)
+  - prism - load used languages only
+  - renderable html/css/js - joshwcomeau
+  - language label
 
 # Blog Ideas
 

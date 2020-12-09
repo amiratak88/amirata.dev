@@ -1,5 +1,5 @@
 import { H1, H2, H3, H4, H5, P, InlineCode, A } from 'components/mdx/other';
-import CodeBlock from 'components/mdx/CodeBlock';
+import { CodeBlock, Pre } from 'components/mdx/code';
 import Note from 'components/mdx/Note';
 import BlockQuote from 'components/mdx/BlockQuote';
 import { MDXProvider as OriginalMDXProvider, Components as MDXComponents } from '@mdx-js/react';
@@ -10,12 +10,13 @@ const mdxComponents: MDXComponents & { Note: typeof Note } = {
 	h3: H3,
 	h4: H4,
 	h5: H5,
-	code: CodeBlock,
 	p: P,
-	inlineCode: InlineCode,
-	Note,
+	a: A,
 	blockquote: BlockQuote,
-	a: A
+	pre: Pre,
+	code: CodeBlock,
+	inlineCode: InlineCode,
+	Note
 };
 
 const MDXProvider: React.FC = ({ children }) => {
