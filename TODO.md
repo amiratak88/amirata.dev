@@ -10,13 +10,14 @@
 - editedAt
 - switch to next-mdx-remote
 - search
+  - maybe look into algolia
 - SEO (research)
 - fix date on safari
 - Note component:
   - scan for !!!
   - interpolate \* and \*\*
   - key prop
-  - icons
+  - **icons**
 - tags
 - Fix publishedAt date timezone
 - code block:
@@ -33,3 +34,8 @@
 # Programming Ideas
 
 - tailwind config file completion
+- tailwind vscode intellisense not working with group-hover
+
+# Coll libraries
+
+- react-dom-confetti
