@@ -9,7 +9,8 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: { sans: ['"IBM Plex Sans"', ...defaultTheme.fontFamily.sans] },
-			borderWidth: { 3: '3px' }
+			borderWidth: { 3: '3px' },
+			fontSize: { '10xl': ['10rem', '1'] }
 		}
 	},
 	variants: {

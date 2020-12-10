@@ -1,4 +1,5 @@
 - storybook
+- package up withClassNameProp and withStyleProp
 - analytics
 - from blog post page
   - go back to index page
@@ -26,6 +27,7 @@
   - prism - load used languages only
   - renderable html/css/js - joshwcomeau
   - language label
+  - fixed line numbers?
 
 # Blog Ideas
 
@@ -34,8 +36,7 @@
 # Programming Ideas
 
 - tailwind config file completion
-- tailwind vscode intellisense not working with group-hover
 
-# Coll libraries
+# Cool libraries
 
 - react-dom-confetti

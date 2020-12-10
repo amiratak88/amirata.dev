@@ -53,23 +53,14 @@ const transformChildren = (children: React.ReactNode): React.ReactNode => {
 };
 
 const Note: React.FC<Props> = ({ children, type = 'info' }) => {
-	const [bgColor, borderColor] = typeColorsMap[type];
+	const [backgroundColor, borderColor] = typeColorsMap[type];
+
 	return (
 		<aside
-			className="p-6 mb-7"
-			// style={{ backgroundColor: bgColor, borderLeft: `5px solid ${borderColor}` }}
-			// style={{
-			// 	backgroundColor: bgColor,
-			// 	borderWidth: '1px',
-			// 	borderLeftWidth: '5px',
-			// 	borderStyle: 'solid',
-			// 	borderColor,
-			// 	borderEndEndRadius: '20px',
-			// 	borderStartEndRadius: '20px'
-			// }}
+			className="p-6 mb-7 border"
 			style={{
-				backgroundColor: bgColor,
-				border: `1px solid ${borderColor}`,
+				backgroundColor,
+				borderColor,
 				borderRadius: '20px'
 			}}
 		>

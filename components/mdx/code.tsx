@@ -8,7 +8,7 @@ import copyToClipboard from 'copy-to-clipboard';
 const _CopyButton: React.FC<{ onClick: MouseEventHandler<HTMLButtonElement> }> = ({ onClick }) => {
 	return (
 		<button
-			aria-label="copy the code"
+			aria-label="Copy the code to clipboard"
 			className={`rounded-lg invisible group-hover:visible border-gray-700 hover:border-gray-500 border-3 px-2 py-1 text-gray-700 hover:text-gray-500`}
 			onClick={onClick}
 		>
