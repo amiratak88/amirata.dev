@@ -2,17 +2,7 @@ import * as React from 'react';
 import { P as _P, InlineCode } from 'components/mdx/other';
 import withStyle from 'utils/withStyle';
 const P = withStyle(_P);
-
-type Props = {
-	type?: 'success' | 'info' | 'warning' | 'danger';
-};
-
-const typeColorsMap: Record<NonNullable<Props['type']>, [string, string]> = {
-	success: ['#0d2726', '#00cc88'],
-	info: ['rgb(28, 53, 79)', 'rgb(9, 125, 196)'],
-	warning: ['#272318', '#ff8000'],
-	danger: ['#271b18', '#ff0000']
-};
+import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 
 const transformString = (str: string): React.ReactNode => {
 	const result = [];
@@ -52,18 +42,43 @@ const transformChildren = (children: React.ReactNode): React.ReactNode => {
 	return children;
 };
 
+type Props = {
+	type?: 'success' | 'info' | 'warning' | 'danger';
+};
+
+const typeColorsMap: Record<NonNullable<Props['type']>, [string, string]> = {
+	success: ['#0d2726', '#00cc88'],
+	info: ['rgb(28, 53, 79)', 'rgb(9, 125, 196)'],
+	warning: ['#272318', '#ff8000'],
+	danger: ['#271b18', '#ff0000']
+};
+
+const iconMap: Record<NonNullable<Props['type']>, FontAwesomeIconProps['icon']> = {
+	success: ['fal', 'check-circle'],
+	info: ['fal', 'info-circle'],
+	warning: ['fal', 'info-circle'],
+	danger: ['fal', 'info-circle']
+};
+
 const Note: React.FC<Props> = ({ children, type = 'info' }) => {
 	const [backgroundColor, borderColor] = typeColorsMap[type];
 
 	return (
 		<aside
-			className="p-6 mb-7 border"
+			className="p-6 mb-7 border-3 rounded-md relative lg:border-r-0 lg:border-t-0 lg:border-b-0 lg:rounded-l-none"
 			style={{
 				backgroundColor,
-				borderColor,
-				borderRadius: '20px'
+				borderColor
 			}}
 		>
+			<div className="absolute top-2 -left-0.5 transform -translate-x-1/2 -translate-y-1/2 rounded-full p5 bg-main hidden lg:block">
+				<FontAwesomeIcon
+					icon={iconMap[type]}
+					size="3x"
+					style={{ color: borderColor }}
+					className="p-1"
+				/>
+			</div>
 			<P style={{ marginBottom: 0 }}>{transformChildren(children)}</P>
 		</aside>
 	);

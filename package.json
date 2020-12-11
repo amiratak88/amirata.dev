@@ -9,6 +9,7 @@
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^1.2.32",
+		"@fortawesome/pro-light-svg-icons": "^5.15.1",
 		"@fortawesome/pro-solid-svg-icons": "^5.15.1",
 		"@fortawesome/react-fontawesome": "^0.1.13",
 		"@mdx-js/react": "^1.6.22",

@@ -9,7 +9,10 @@
 - footer
 - reading-time
 - editedAt
-- switch to next-mdx-remote
+- MDX processing
+  - switch to next-mdx-remote
+  - validate front matter (e.g., "title" must be provided)
+  - programtically supply publishedAt if not defined and write to the file
 - search
   - maybe look into algolia
 - SEO (research)
@@ -18,7 +21,6 @@
   - scan for !!!
   - interpolate \* and \*\*
   - key prop
-  - **icons**
 - tags
 - Fix publishedAt date timezone
 - code block:
@@ -28,15 +30,16 @@
   - renderable html/css/js - joshwcomeau
   - language label
   - fixed line numbers?
+- adjust withClassName and withStyle utilities' types so they can't accept components that have className and style defined?
 
 # Blog Ideas
 
 - advent of code
-
-# Programming Ideas
-
-- tailwind config file completion
+- gitmoji program
+- remix + benchmark comparison
 
 # Cool libraries
 
 - react-dom-confetti
+- node-git
+- react-spring
