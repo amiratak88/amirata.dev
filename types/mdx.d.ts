@@ -35,18 +35,3 @@ declare module '@mdx-js/react' {
 	}
 	export class MDXProvider extends React.Component<MDXProviderProps> {}
 }
-
-declare module '*.mdx' {
-	export const frontMatter: BlogFrontMatter[];
-}
-
-type BlogFrontMatter = {
-	title: string;
-	intro: string;
-	publishedAt: string;
-	__resourcePath: string;
-};
-
-type BlogFrontMatterWithDate = Omit<BlogFrontMatter, 'publishedAt'> & {
-	publishedAt: Date;
-};

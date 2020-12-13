@@ -26,8 +26,18 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 			.filter((p) => /\.mdx$/.test(p))
 			.map(async (p) => ({ content: await readFile(path.join(blogDirectory, p), 'utf8'), path: p }))
 	).then((data) =>
-		data.map((d) => ({ ...matter(d.content).data, __resourcePath: d.path }))
-	)) as BlogFrontMatter[];
+		data.map((d) => {
+			const frontMatter = matter(d.content).data;
+			return {
+				...frontMatter,
+				title: frontMatter.title || 'Untitled',
+				intro: frontMatter.intro || 'No Intro Provided',
+				publishedAt: frontMatter.publishedAt || new Date().toISOString(),
+				__resourcePath: d.path,
+				__scan: {}
+			};
+		})
+	)) as BlogFrontMatterWithMetadata[];
 
 	const blogs = frontMatters
 		.map((matter) => {

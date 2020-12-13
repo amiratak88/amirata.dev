@@ -1,23 +1,19 @@
-import Page, { PageProps } from 'components/Page';
+import Page from 'components/Page';
 import { H1 } from 'components/mdx/other';
 import MDXProvider from 'components/mdx/Provider';
 import ReadingContainer from 'components/ReadingContainer';
+import dayjs from 'dayjs';
 
-type BlogPostPageProps = PageProps & { frontMatter: BlogFrontMatter };
-
-const BlogPostPage: React.FC<BlogPostPageProps> = ({
+const BlogPostPage: React.FC<{ frontMatter: BlogFrontMatterWithMetadata }> = ({
 	frontMatter: { title, publishedAt },
 	children
 }) => {
-	const publishedAtText = Intl.DateTimeFormat('en-US', {
-		// @ts-ignore
-		dateStyle: 'medium'
-	}).format(new Date(publishedAt));
+	const formattedPublishedAt = dayjs(publishedAt).format('MMM D, YY');
 
 	return (
 		<Page title={`${title} - Blog - Amirata`}>
 			<ReadingContainer>
-				<p className="text-gray-500 text-sm text-right">{publishedAtText}</p>
+				<p className="text-gray-500 text-sm text-right">{formattedPublishedAt}</p>
 				<H1>{title}</H1>
 				<MDXProvider>{children}</MDXProvider>
 			</ReadingContainer>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
+import dayjs from 'dayjs';
 
 interface BlogPreviewProps {
 	title: string;
@@ -11,10 +12,7 @@ interface BlogPreviewProps {
 }
 
 const BlogPreview: React.FC<BlogPreviewProps> = ({ title, text, slug, publishedAt }) => {
-	const formattedPublishedAt = Intl.DateTimeFormat('en-US', {
-		// @ts-ignore
-		dateStyle: 'medium'
-	}).format(new Date(publishedAt));
+	const formattedPublishedAt = dayjs(publishedAt).format('MMM D, YY');
 
 	return (
 		<div>

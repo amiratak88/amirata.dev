@@ -1,11 +1,11 @@
 import Header from 'components/Header';
 import Head from 'next/head';
 
-export interface PageProps {
+type Props = {
 	title: string;
-}
+};
 
-const Page: React.FC<PageProps> = ({ title, children }) => {
+const Page: React.FC<Props> = ({ title, children }) => {
 	return (
 		<div className="w-full">
 			<Head>
