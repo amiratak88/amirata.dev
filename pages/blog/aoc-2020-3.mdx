@@ -1,0 +1,146 @@
+---
+title: Advent of Code 2020 Day 3 Solution
+intro: TypeScript code plus explanation
+publishedAt: 2020-12-12T18:21-0500
+---
+
+> Advent of Code is an Advent calendar of small programming puzzles for a
+> variety of skill sets and skill levels that can be solved in any programming
+> language you like. People use them as a speed contest, interview prep,
+> company training, university coursework, practice problems, or to challenge
+> each other. &mdash; [AdventOfCode.com](https://adventofcode.com/2020/about)
+
+For this [puzzle](https://adventofcode.com/2020/day/3), we're given a map of
+`#` and `.`. `#` matches a tree and `.` matches an open square. The input
+looks something like this:
+
+```txt nonumber
+..##.......
+#...#...#..
+.#....#..#.
+..#.#...#.#
+.#...##..#.
+..#.##.....
+.#.#.#....#
+.#........#
+#.##...#...
+#...##....#
+.#..#...#.#
+```
+
+The given input is only the pattern for the whole map. The same pattern
+repeats to the right many times:
+
+```txt nonumber
+..##.........##.........##.........##.........##.........##.......  --->
+#...#...#..#...#...#..#...#...#..#...#...#..#...#...#..#...#...#..
+.#....#..#..#....#..#..#....#..#..#....#..#..#....#..#..#....#..#.
+..#.#...#.#..#.#...#.#..#.#...#.#..#.#...#.#..#.#...#.#..#.#...#.#
+.#...##..#..#...##..#..#...##..#..#...##..#..#...##..#..#...##..#.
+..#.##.......#.##.......#.##.......#.##.......#.##.......#.##.....  --->
+.#.#.#....#.#.#.#....#.#.#.#....#.#.#.#....#.#.#.#....#.#.#.#....#
+.#........#.#........#.#........#.#........#.#........#.#........#
+#.##...#...#.##...#...#.##...#...#.##...#...#.##...#...#.##...#...
+#...##....##...##....##...##....##...##....##...##....##...##....#
+.#..#...#.#.#..#...#.#.#..#...#.#.#..#...#.#.#..#...#.#.#..#...#.#  --->
+```
+
+## Part I
+
+**Problem**: If we start at the top-left corner and move down the map with the
+slope _down: 1, right: 3_ how many trees do we encounter in our path?
+
+**Solution**: We're going to use the given slope to traverse the map and count
+the number of `#` characters.
+
+```ts
+const input = `
+..##.......
+#...#...#..
+.#....#..#.
+..#.#...#.#
+.#...##..#.
+..#.##.....
+.#.#.#....#
+.#........#
+#.##...#...
+#...##....#
+.#..#...#.#
+`.trim();
+
+const lines = input.split('\n');
+
+function part1() {
+	let treeCount = 0;
+	let col = 0;
+
+	for (const line of lines) {
+		// At some point we're going to get past the initial pattern
+		// and need to modulo the col by line length to get the current
+		// character
+		const index = col % line.length;
+		const currentChar = line[index];
+		if (currentChar === '#') treeCount++;
+		col += 3;
+	}
+
+	return treeCount;
+}
+```
+
+**Complexity**: This code runs in linear time and constant space.
+
+## Part II
+
+**Prolem**: We're given a few differnet slopes. After counting the encoutered
+trees for each slope, we need to multiply them together to solve this puzzle.
+
+**Solution**: Using our solution for Part I, we can make a function that can
+accept a slope and give us a tree count. We can then use that function to get
+the tree counts for every slope and mulitply the results together.
+
+The slopes are:
+
+- Right 1, down 1
+- Right 3, down 1
+- Right 5, down 1
+- Right 7, down 1
+- Right 1, down 2
+
+```ts
+type Slope = {
+	right: number;
+	down: number;
+};
+
+function countTrees(lines: string[], slope: Slope) {
+	let treeCount = 0;
+	let right = slope.right;
+
+	for (let down = slope.down; down < lines.length; down += slope.down) {
+		const col = right % line.length;
+		const currentChar = line[col];
+		if (currentChar === '#') treeCount++;
+	}
+
+	return treeCount;
+}
+
+function part2() {
+	const slopes: Slope[] = [
+		{ right: 1, down: 1 },
+		{ right: 3, down: 1 },
+		{ right: 5, down: 1 },
+		{ right: 7, down: 1 },
+		{ right: 1, down: 2 }
+	];
+
+	return slopes
+		.map((slope) => countTrees(lines, slope))
+		.reduce((acc, count) => acc * count);
+}
+```
+
+**Complexity**: Time complexity is O(n\*m) where _n_ is the number of lines
+and _m_ is the number of slopes we have to loop through and space complexity
+remains linear.

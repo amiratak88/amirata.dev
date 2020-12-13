@@ -39,3 +39,5 @@ export const A: React.FC<{ href: string }> = ({ children, href }) => {
 		</span>
 	);
 };
+export const Ul: React.FC = ({ children }) => <ul className="mdx-ul">{children}</ul>;
+export const Li: React.FC = ({ children }) => <li className="mdx-li">{children}</li>;

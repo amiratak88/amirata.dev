@@ -27,3 +27,17 @@ a {
 * {
 	box-sizing: border-box;
 }
+
+/* MDX lists */
+.mdx-ul {
+	@apply text-lg ml-6 list-disc list-inside mb-7;
+}
+.mdx-ul .mdx-ul {
+	@apply list-circle mb-0;
+}
+.mdx-ul .mdx-ul .mdx-ul {
+	@apply list-square;
+}
+.mdx-li {
+	@apply mb-1;
+}

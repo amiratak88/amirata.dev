@@ -10,7 +10,8 @@ module.exports = {
 		extend: {
 			fontFamily: { sans: ['"IBM Plex Sans"', ...defaultTheme.fontFamily.sans] },
 			borderWidth: { 3: '3px' },
-			fontSize: { '10xl': ['10rem', '1'] }
+			fontSize: { '10xl': ['10rem', '1'] },
+			listStyleType: { circle: 'circle', square: 'square' }
 		}
 	},
 	variants: {
