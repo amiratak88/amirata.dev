@@ -1,0 +1,206 @@
+---
+title: Advent of Code 2020 Day 4 Solution
+intro: TypeScript code plus explanation
+publishedAt: 2020-12-13T21:03-0500
+---
+
+> Advent of Code is an Advent calendar of small programming puzzles for a
+> variety of skill sets and skill levels that can be solved in any programming
+> language you like. People use them as a speed contest, interview prep,
+> company training, university coursework, practice problems, or to challenge
+> each other. &mdash; [AdventOfCode.com](https://adventofcode.com/2020/about)
+
+For this [puzzle](https://adventofcode.com/2020/day/4), we're given a list of
+passport data and our job is to count the valid passports.
+
+Passports are separated by a blank line and each passport is repersented as a
+sequence of **key:value** paris separated by space or newlines. Here's an
+example input:
+
+```txt nonumber
+ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+byr:1937 iyr:2017 cid:147 hgt:183cm
+
+iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
+hcl:#cfa07d byr:1929
+
+hcl:#ae17e1 iyr:2013
+eyr:2024
+ecl:brn pid:760753108 byr:1931
+hgt:179cm
+
+hcl:#cfa07d eyr:2025 pid:166559648
+iyr:2011 ecl:brn hgt:59in
+```
+
+Every field listed below is required except for **cid** which is optional:
+
+- byr (Birth Year)
+- iyr (Issue Year)
+- eyr (Expiration Year)
+- hgt (Height)
+- hcl (Hair Color)
+- ecl (Eye Color)
+- pid (Passport ID)
+- cid (Country ID)
+
+## Part I
+
+**Problem**: Count the number of valid passports (Ones that have all the
+requried fields.)
+
+**Solution**: We're going to parse our input and turn it into an array of
+objects. After that, it should be easier to determine which passports are
+valid.
+
+```ts
+const input = `
+ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+byr:1937 iyr:2017 cid:147 hgt:183cm
+
+iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
+hcl:#cfa07d byr:1929
+
+hcl:#ae17e1 iyr:2013
+eyr:2024
+ecl:brn pid:760753108 byr:1931
+hgt:179cm
+
+hcl:#cfa07d eyr:2025 pid:166559648
+iyr:2011 ecl:brn hgt:59in
+`;
+
+function parseInput(input: string) {
+	return input
+		.trim()
+		.split('\n\n')
+		.map((str) => {
+			const obj: Record<string, string> = {};
+			const pairs = str.split(/\s/).map((p) => p.split(':'));
+			pairs.forEach((p) => (obj[p[0]] = p[1]));
+			return obj;
+		});
+}
+
+// true means "required" and false means "optional"
+const validKeys = {
+	byr: true,
+	iyr: true,
+	eyr: true,
+	hgt: true,
+	hcl: true,
+	ecl: true,
+	pid: true,
+	cid: false
+};
+
+function part1() {
+	const passports = parseInput(input);
+	let validCount = 0;
+
+	for (const passport of passports) {
+		let validKeyCount = 0;
+
+		for (const key in passport) {
+			const seenKeys = new Set<string>(); // using this set to handle duplicate keys
+
+			// if an invalid key is found, skip this passport
+			// because it can't be invalid. The actual input
+			// doesn't have any invalid keys, but we do this
+			// to be safe.
+			if (!(key in validKeys)) {
+				continue;
+			}
+
+			if (validKeys[key] && !seenKeys.has(key)) {
+				validKeyCount++;
+				seenKeys.add(key);
+			}
+		}
+
+		// if the password is valid, "validKeyCount" must
+		// be exactly "7".
+		if (validKeyCount === 7) validCount++;
+	}
+
+	return validCount;
+}
+```
+
+**Complexity**: The time complexity is linear (O(n) where n is the number of
+passports.) The second loop is negligible. The space complexity is constant.
+We are storing a few things but that's negligible compared to the size of the
+input.
+
+## Part II
+
+Each field has strict rules about what is considered a valid value:
+
+- byr (Birth Year) - four digits; at least 1920 and at most 2002.
+- iyr (Issue Year) - four digits; at least 2010 and at most 2020.
+- eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
+- hgt (Height) - a number followed by either cm or in:
+  - If cm, the number must be at least 150 and at most 193.
+  - If in, the number must be at least 59 and at most 76.
+- hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
+- ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
+- pid (Passport ID) - a nine-digit number, including leading zeroes.
+- cid (Country ID) - ignored, missing or not.
+
+```ts
+function isValid(key: string, value: string) {
+	switch (key) {
+		case 'byr':
+			return /^\d{4}$/.test(value) && +value <= 2002 && +value >= 1920;
+		case 'iyr':
+			return /^\d{4}$/.test(value) && +value <= 2020 && +value >= 2010;
+		case 'eyr':
+			return /^\d{4}$/.test(value) && +value <= 2030 && +value >= 2020;
+		case 'hgt':
+			const match = value.match(/^(\d+)(in|cm)$/);
+			if (!match) return false;
+			return match[2] === 'in'
+				? +match[1] >= 59 && +match[1] <= 76
+				: +match[1] >= 150 && +match[1] <= 193;
+		case 'hcl':
+			return /^#[0-9a-f]{6}$/.test(value);
+		case 'ecl':
+			return /^amb|blu|brn|gry|grn|hzl|oth$/.test(value);
+		case 'pid':
+			return /^[0-9]{9}$/.test(value);
+		case 'cid':
+			return true;
+		default:
+			return false;
+	}
+}
+
+function part2() {
+	const passports = parseInput(input);
+	let validCount = 0;
+
+	for (const passport of passports) {
+		let validKeyCount = 0;
+		const seenKeys = new Set<string>();
+
+		for (const [key, value] of passport.entries()) {
+			if (key === 'cid' || seenKeys.has(key)) continue;
+
+			if (isValid(key, value)) {
+				validKeyCount++;
+				seenKeys.add(key);
+			} else {
+				break;
+			}
+		}
+
+		// if the password is valid, "validKeyCount" must
+		// be exactly "7".
+		if (validKeyCount === 7) validCount++;
+	}
+
+	return validCount;
+}
+```
+
+**Complexity**: Same as part I; Linear time and constant space.

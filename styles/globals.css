@@ -39,5 +39,8 @@ a {
 	@apply list-square;
 }
 .mdx-li {
-	@apply mb-1;
+	@apply mb-1.5;
+}
+.mdx-ul .mdx-li {
+	@apply mt-1.5;
 }
