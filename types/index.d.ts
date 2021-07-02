@@ -8,3 +8,12 @@ declare module next {
 // TODO: Find a better way to handle
 type BlogFrontMatter = import('./blog').BlogFrontMatter;
 type BlogFrontMatterWithMetadata = import('./blog').BlogFrontMatterWithMetadata;
+
+
+
+
+
+
+
+
+

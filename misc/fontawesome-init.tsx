@@ -12,4 +12,5 @@ import { faInfoCircle, faCheckCircle } from '@fortawesome/pro-light-svg-icons';
 // import {} from '@fortawesome/pro-regular-svg-icons';
 import { faCopy } from '@fortawesome/pro-solid-svg-icons';
 
+
 library.add(faCopy, faInfoCircle, faCheckCircle);

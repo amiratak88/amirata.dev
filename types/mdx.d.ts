@@ -15,6 +15,27 @@ declare module '@mdx-js/react' {
 		| 'hr'
 		| 'img'
 		| 'inlineCode'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
 		| 'li'
 		| 'ol'
 		| 'p'
