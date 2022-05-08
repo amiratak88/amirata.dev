@@ -5,7 +5,7 @@ intro:
   In this post, I talk about how I built two HOCs (higher order components)
   "withClassName" and "withStyle" to help me build more composeable React
   components
-publishedAt: 2020-12-06T02:44-0500[America/New_York]
+publishedAt: 2020-12-06T02:44-0500
 ---
 
 In this post, we are going to learn how to build two HOCs (higher order
@@ -98,8 +98,9 @@ function component of type `React.FC<T & { className?: string; }`. Now we can
 build our BlueButton component without touching the Button component.
 
 ```tsx
-import _Button from "components/Button";
 import withClassName from "utils/withClassName";
+
+import _Button from "components/Button";
 
 const Button = withClassName(_Button);
 

@@ -3,7 +3,7 @@
 	"quoteProps": "consistent",
 	"trailingComma": "all",
 	"useTabs": true,
-	"importOrder": ["^[./]"],
+	"importOrder": ["^components\\/", "^[./]"],
 	"importOrderSeparation": true,
 	"importOrderSortSpecifiers": true,
 	"importOrderCaseInsensitive": true,

@@ -1,10 +1,12 @@
-import { Components as MDXComponents, MDXProvider as OriginalMDXProvider } from "@mdx-js/react";
-import BlockQuote from "components/mdx/BlockQuote";
-import { CodeBlock, Pre } from "components/mdx/code";
-import Note from "components/mdx/Note";
-import { A, H1, H2, H3, H4, H5, InlineCode, Li, P, Ul } from "components/mdx/other";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { MDXComponents } from "utils/types";
 
-const mdxComponents: MDXComponents & { Note: typeof Note } = {
+import BlockQuote from "components/mdx/BlockQuote";
+import { Code, Pre } from "components/mdx/code";
+import Note from "components/mdx/Note";
+import { A, H1, H2, H3, H4, H5, Li, P, Ul } from "components/mdx/other";
+
+const mdxComponents: MDXComponents = {
 	h1: H1,
 	h2: H2,
 	h3: H3,
@@ -14,15 +16,17 @@ const mdxComponents: MDXComponents & { Note: typeof Note } = {
 	a: A,
 	blockquote: BlockQuote,
 	pre: Pre,
-	code: CodeBlock,
-	inlineCode: InlineCode,
+	code: Code,
 	Note,
 	ul: Ul,
 	li: Li,
 };
 
-const MDXProvider: React.FC = ({ children }) => {
-	return <OriginalMDXProvider components={mdxComponents}>{children}</OriginalMDXProvider>;
+const MDXProvider: React.FC<MDXRemoteSerializeResult> = (source) => {
+	return (
+		// @ts-expect-error MDX component types are incorrect
+		<MDXRemote {...source} components={mdxComponents} />
+	);
 };
 
 export default MDXProvider;
