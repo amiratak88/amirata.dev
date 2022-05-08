@@ -1,8 +1,8 @@
 import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
 
-type Props = {
+interface Props {
 	type?: "success" | "info" | "warning" | "danger";
-};
+}
 
 const typeColorsMap: Record<NonNullable<Props["type"]>, [string, string]> = {
 	success: ["#0d2726", "#00cc88"],
