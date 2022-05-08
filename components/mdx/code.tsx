@@ -5,6 +5,15 @@ import theme from "prism-react-renderer/themes/nightOwl";
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import withClassName from "utils/withClassName";
 
+const InlineCode: React.FCWithChildren = ({ children }) => (
+	<code
+		className="rounded-md px-1 mx-1 font-mono text-base"
+		style={{ backgroundColor: "#d7b34829", color: "#ffef00d6", border: "2px solid #d7b348bd" }}
+	>
+		{children}
+	</code>
+);
+
 const _CopyButton: React.FC<{ onClick: MouseEventHandler<HTMLButtonElement> }> = ({ onClick }) => {
 	return (
 		<button
@@ -19,15 +28,14 @@ const _CopyButton: React.FC<{ onClick: MouseEventHandler<HTMLButtonElement> }> =
 
 const CopyButton = withClassName(_CopyButton);
 
-type CodeBlockProps = {
+interface CodeBlockProps {
+	language: string;
+	shouldShowLineNumbers: boolean;
 	children: string;
-	className: string;
-	nonumber?: boolean;
-};
+}
 
-export const CodeBlock: React.FC<CodeBlockProps> = ({ children, className, nonumber = false }) => {
+const CodeBlock: React.FC<CodeBlockProps> = ({ children, language, shouldShowLineNumbers }) => {
 	const trimmedChildren = children.trim();
-	const language = className.replace(/language-/, "");
 	const ref = useRef<HTMLDivElement>(null);
 	const [showCopySuccess, setShowCopySuccess] = useState(false);
 
@@ -72,7 +80,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ children, className, nonum
 					<CopyButton className="absolute top-3 right-3" onClick={onCopyButtonClick} />
 					{tokens.map((line, i) => (
 						<div {...getLineProps({ line, key: i })} className="prism-line table-row code-line">
-							{!nonumber && (
+							{shouldShowLineNumbers && (
 								<span className="text-gray-700 table-cell text-right pr-4 select-none">
 									{i + 1}
 								</span>
@@ -90,7 +98,28 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ children, className, nonum
 	);
 };
 
-export const Pre: React.FC = ({ children }) => {
+type CodeProps = {
+	children: string;
+	className?: string;
+	nonumber?: boolean;
+};
+
+export const Code: React.FCWithChildren<CodeProps> = ({
+	children,
+	className,
+	nonumber = false,
+}) => {
+	if (className) {
+		const shouldShowLineNumbers = !nonumber;
+		const language = className.replace(/language-/, "");
+
+		return <CodeBlock {...{ shouldShowLineNumbers, language }}>{children}</CodeBlock>;
+	}
+
+	return <InlineCode>{children}</InlineCode>;
+};
+
+export const Pre: React.FCWithChildren = ({ children }) => {
 	return (
 		<div className="bg-black rounded-lg p-3 overflow-hidden mb-7 whitespace-pre relative">
 			{children}
