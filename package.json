@@ -8,7 +8,8 @@
 		"dev": "next dev",
 		"prettier:check": "prettier --check --ignore-path ./.gitignore .",
 		"prettier:write": "prettier --write --ignore-path ./.gitignore .",
-		"start": "next start"
+		"start": "next start",
+		"type-check": "tsc"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.1.1",

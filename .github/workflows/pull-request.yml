@@ -1,12 +1,14 @@
-name: Main
+name: Pull request
 on: [push]
 jobs:
-  main:
+  pull-request-checks:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Install dependencies
         run: yarn
-      - name: Run prettier
+      - name: Check validity of code formatting
         run: yarn prettier:check
+      - name: Check validity of types
+        run: yarn type-check

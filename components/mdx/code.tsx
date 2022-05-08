@@ -31,13 +31,10 @@ const CopyButton = withClassName(_CopyButton);
 interface CodeBlockProps {
 	language: string;
 	shouldShowLineNumbers: boolean;
+	children: string;
 }
 
-const CodeBlock: React.FCWithChildren<CodeBlockProps> = ({
-	children,
-	language,
-	shouldShowLineNumbers,
-}) => {
+const CodeBlock: React.FC<CodeBlockProps> = ({ children, language, shouldShowLineNumbers }) => {
 	const trimmedChildren = children.trim();
 	const ref = useRef<HTMLDivElement>(null);
 	const [showCopySuccess, setShowCopySuccess] = useState(false);
