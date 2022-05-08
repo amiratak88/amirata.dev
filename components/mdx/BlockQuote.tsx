@@ -1,6 +1,7 @@
-import * as React from 'react';
-import { P as _P } from 'components/mdx/other';
-import withStyle from 'utils/withStyle';
+import { P as _P } from "components/mdx/other";
+import * as React from "react";
+import withStyle from "utils/withStyle";
+
 const P = withStyle(_P);
 
 const BlockQuote: React.FC = ({ children }) => {
@@ -13,7 +14,7 @@ const BlockQuote: React.FC = ({ children }) => {
 				&ldquo;
 			</p>
 			<P style={{ marginBottom: 0 }}>
-				{children && typeof children === 'object' && 'props' in children
+				{children && typeof children === "object" && "props" in children
 					? children.props.children
 					: children}
 			</P>

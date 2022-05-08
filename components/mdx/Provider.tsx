@@ -1,8 +1,8 @@
-import { H1, H2, H3, H4, H5, P, InlineCode, A, Ul, Li } from 'components/mdx/other';
-import { CodeBlock, Pre } from 'components/mdx/code';
-import Note from 'components/mdx/Note';
-import BlockQuote from 'components/mdx/BlockQuote';
-import { MDXProvider as OriginalMDXProvider, Components as MDXComponents } from '@mdx-js/react';
+import { Components as MDXComponents, MDXProvider as OriginalMDXProvider } from "@mdx-js/react";
+import BlockQuote from "components/mdx/BlockQuote";
+import { CodeBlock, Pre } from "components/mdx/code";
+import Note from "components/mdx/Note";
+import { A, H1, H2, H3, H4, H5, InlineCode, Li, P, Ul } from "components/mdx/other";
 
 const mdxComponents: MDXComponents & { Note: typeof Note } = {
 	h1: H1,
@@ -18,7 +18,7 @@ const mdxComponents: MDXComponents & { Note: typeof Note } = {
 	inlineCode: InlineCode,
 	Note,
 	ul: Ul,
-	li: Li
+	li: Li,
 };
 
 const MDXProvider: React.FC = ({ children }) => {

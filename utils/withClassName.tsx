@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 // W wrapped
 // E enhanced
@@ -15,7 +15,7 @@ const withClassName = <T extends { [x: string]: any }>(W: React.FC<T>) => {
 		return React.cloneElement(
 			elementsTree,
 			{ ...elementsTree.props, className: newClassName },
-			elementsTree.props.children
+			elementsTree.props.children,
 		);
 	};
 

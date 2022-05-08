@@ -1,9 +1,9 @@
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require("next-compose-plugins");
 
-const withMdxEnahcned = require('next-mdx-enhanced')({
-	layoutPath: 'components/mdx-layouts',
+const withMdxEnahcned = require("next-mdx-enhanced")({
+	layoutPath: "components/mdx-layouts",
 	defaultLayout: true,
-	fileExtensions: ['mdx'],
+	fileExtensions: ["mdx"],
 	// remarkPlugins: [],
 	// rehypePlugins: [],
 	usesSrc: false,
@@ -20,11 +20,11 @@ const withMdxEnahcned = require('next-mdx-enhanced')({
 				...frontMatter,
 				title: frontMatter.title,
 				intro: frontMatter.intro,
-				publishedAt: frontMatter.publishedAt
+				publishedAt: frontMatter.publishedAt,
 			};
-		}
+		},
 		// phase: 'prebuild|loader|both'
-	}
+	},
 	// scan: {
 	// 	pattern: /something/,
 	// 	transform: (match) => {}
@@ -37,13 +37,13 @@ const nextConfig = {
 	async redirects() {
 		return [
 			{
-				source: '/',
-				destination: '/blog',
-				permanent: false
-			}
+				source: "/",
+				destination: "/blog",
+				permanent: false,
+			},
 		];
 	},
-	pageExtensions: ['tsx', 'mdx']
+	pageExtensions: ["tsx", "mdx"],
 };
 
 module.exports = withPlugins([withMdxEnahcned], nextConfig);

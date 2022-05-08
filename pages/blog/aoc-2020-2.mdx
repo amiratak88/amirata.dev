@@ -38,7 +38,7 @@ const input = `
 2-9 c: cccccccccccc
 `;
 
-const lines = input.trim().split('\n');
+const lines = input.trim().split("\n");
 
 let validCount = 0;
 
@@ -51,7 +51,7 @@ for (const line of lines) {
 	const letter = line[4];
 	const password = line.slice(7); // slice from the 7th index to the end of the string
 	const count = password
-		.split('')
+		.split("")
 		.reduce((acc, curr) => (curr === letter ? acc + 1 : acc), 0); // fancy way to count the character
 
 	// increment validCount if "count" is "valid" 😄

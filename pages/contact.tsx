@@ -1,5 +1,5 @@
-import Page from 'components/Page';
-import ReadingContainer from 'components/ReadingContainer';
+import Page from "components/Page";
+import ReadingContainer from "components/ReadingContainer";
 
 const Contact = () => {
 	return (

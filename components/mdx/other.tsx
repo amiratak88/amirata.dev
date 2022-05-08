@@ -1,5 +1,5 @@
-import * as React from 'react';
-import Link from 'next/link';
+import Link from "next/link";
+import * as React from "react";
 
 export const H1: React.FC = ({ children }) => (
 	<h1 className="text-4xl font-extrabold text-indigo-400 mb-4">{children}</h1>
@@ -20,14 +20,14 @@ export const P: React.FC = ({ children }) => <p className="text-lg mb-7 leading-
 export const InlineCode: React.FC = ({ children }) => (
 	<code
 		className="rounded-md px-1 mx-1 font-mono text-base"
-		style={{ backgroundColor: '#d7b34829', color: '#ffef00d6', border: '2px solid #d7b348bd' }}
+		style={{ backgroundColor: "#d7b34829", color: "#ffef00d6", border: "2px solid #d7b348bd" }}
 	>
 		{children}
 	</code>
 );
 export const A: React.FC<{ href: string }> = ({ children, href }) => {
-	const isExternal = href.startsWith('http'); // TODO: this logic can be improved
-	const className = 'text-yellow-400 hover:underline';
+	const isExternal = href.startsWith("http"); // TODO: this logic can be improved
+	const className = "text-yellow-400 hover:underline";
 
 	return isExternal ? (
 		<a href={href} className={className} target="_blank">
