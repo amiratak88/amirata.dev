@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 // W wrapped
 // E enhanced
@@ -11,7 +11,7 @@ const withStyle = <T extends { [x: string]: any }>(W: React.FC<T>) => {
 		return React.cloneElement(
 			elementsTree,
 			{ ...elementsTree.props, style: { ...elementsTree.props.style, ...style } },
-			elementsTree.props.children
+			elementsTree.props.children,
 		);
 	};
 

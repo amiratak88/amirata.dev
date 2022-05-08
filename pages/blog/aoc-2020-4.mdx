@@ -73,10 +73,10 @@ iyr:2011 ecl:brn hgt:59in
 function parseInput(input: string) {
 	return input
 		.trim()
-		.split('\n\n')
+		.split("\n\n")
 		.map((str) => {
 			const obj: Record<string, string> = {};
-			const pairs = str.split(/\s/).map((p) => p.split(':'));
+			const pairs = str.split(/\s/).map((p) => p.split(":"));
 			pairs.forEach((p) => (obj[p[0]] = p[1]));
 			return obj;
 		});
@@ -91,7 +91,7 @@ const validKeys = {
 	hcl: true,
 	ecl: true,
 	pid: true,
-	cid: false
+	cid: false,
 };
 
 function part1() {
@@ -150,25 +150,25 @@ Each field has strict rules about what is considered a valid value:
 ```ts
 function isValid(key: string, value: string) {
 	switch (key) {
-		case 'byr':
+		case "byr":
 			return /^\d{4}$/.test(value) && +value <= 2002 && +value >= 1920;
-		case 'iyr':
+		case "iyr":
 			return /^\d{4}$/.test(value) && +value <= 2020 && +value >= 2010;
-		case 'eyr':
+		case "eyr":
 			return /^\d{4}$/.test(value) && +value <= 2030 && +value >= 2020;
-		case 'hgt':
+		case "hgt":
 			const match = value.match(/^(\d+)(in|cm)$/);
 			if (!match) return false;
-			return match[2] === 'in'
+			return match[2] === "in"
 				? +match[1] >= 59 && +match[1] <= 76
 				: +match[1] >= 150 && +match[1] <= 193;
-		case 'hcl':
+		case "hcl":
 			return /^#[0-9a-f]{6}$/.test(value);
-		case 'ecl':
+		case "ecl":
 			return /^amb|blu|brn|gry|grn|hzl|oth$/.test(value);
-		case 'pid':
+		case "pid":
 			return /^[0-9]{9}$/.test(value);
-		case 'cid':
+		case "cid":
 			return true;
 		default:
 			return false;
@@ -184,7 +184,7 @@ function part2() {
 		const seenKeys = new Set<string>();
 
 		for (const [key, value] of passport.entries()) {
-			if (key === 'cid' || seenKeys.has(key)) continue;
+			if (key === "cid" || seenKeys.has(key)) continue;
 
 			if (isValid(key, value)) {
 				validKeyCount++;

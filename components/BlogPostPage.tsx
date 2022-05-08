@@ -1,18 +1,18 @@
-import Page from 'components/Page';
-import { H1 } from 'components/mdx/other';
-import MDXProvider from 'components/mdx/Provider';
-import ReadingContainer from 'components/ReadingContainer';
-import { Temporal, Intl } from '@js-temporal/polyfill';
+import { Intl, Temporal } from "@js-temporal/polyfill";
+import { H1 } from "components/mdx/other";
+import MDXProvider from "components/mdx/Provider";
+import Page from "components/Page";
+import ReadingContainer from "components/ReadingContainer";
 
 const BlogPostPage: React.FC<{ frontMatter: BlogFrontMatterWithMetadata }> = ({
 	frontMatter: { title, publishedAt },
-	children
+	children,
 }) => {
 	const publishedAtTemporal = Temporal.ZonedDateTime.from(publishedAt);
 	const zonedPublishedAtTemporal = publishedAtTemporal.withTimeZone(Temporal.Now.timeZone());
-	const formattedPublishedAt = Intl.DateTimeFormat('en-US', {
-		month: 'long',
-		day: 'numeric'
+	const formattedPublishedAt = Intl.DateTimeFormat("en-US", {
+		month: "long",
+		day: "numeric",
 	}).format(zonedPublishedAtTemporal);
 
 	return (

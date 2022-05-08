@@ -1,9 +1,9 @@
-import { MouseEventHandler, useEffect, useRef, useState } from 'react';
-import Highlight, { defaultProps, Language as PrismLanguage } from 'prism-react-renderer';
-import theme from 'prism-react-renderer/themes/nightOwl';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import withClassName from 'utils/withClassName';
-import copyToClipboard from 'copy-to-clipboard';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import copyToClipboard from "copy-to-clipboard";
+import Highlight, { defaultProps, Language as PrismLanguage } from "prism-react-renderer";
+import theme from "prism-react-renderer/themes/nightOwl";
+import { MouseEventHandler, useEffect, useRef, useState } from "react";
+import withClassName from "utils/withClassName";
 
 const _CopyButton: React.FC<{ onClick: MouseEventHandler<HTMLButtonElement> }> = ({ onClick }) => {
 	return (
@@ -27,7 +27,7 @@ type CodeBlockProps = {
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({ children, className, nonumber = false }) => {
 	const trimmedChildren = children.trim();
-	const language = className.replace(/language-/, '');
+	const language = className.replace(/language-/, "");
 	const ref = useRef<HTMLDivElement>(null);
 	const [showCopySuccess, setShowCopySuccess] = useState(false);
 
@@ -42,9 +42,9 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ children, className, nonum
 	const onCopyButtonClick: MouseEventHandler<HTMLButtonElement> = () => {
 		if (!ref.current) return;
 		const text = Array.from(ref.current?.children)
-			.filter((node) => node.className.includes('prism-line'))
-			.map((node) => node.lastChild?.textContent ?? '')
-			.join('\n');
+			.filter((node) => node.className.includes("prism-line"))
+			.map((node) => node.lastChild?.textContent ?? "")
+			.join("\n");
 
 		if (text) {
 			copyToClipboard(text);
@@ -64,7 +64,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ children, className, nonum
 					<div
 						role="alert"
 						className={`font-sans bg-green-900 text-green-400 border-2 border-green-400 absolute text-center p-1.5 rounded-md transition-all duration-300 ${
-							showCopySuccess ? 'top-3 opacity-100 visible' : 'top-5 opacity-0 invisible'
+							showCopySuccess ? "top-3 opacity-100 visible" : "top-5 opacity-0 invisible"
 						} left-1/2 transform -translate-x-1/2`}
 					>
 						Copied!

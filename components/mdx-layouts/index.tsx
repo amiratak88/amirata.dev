@@ -1,1 +1,1 @@
-export { default } from 'components/BlogPostPage';
+export { default } from "components/BlogPostPage";

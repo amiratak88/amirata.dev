@@ -1,14 +1,15 @@
-import Page from 'components/Page';
-import BlogPreview from 'components/BlogPreview';
-import matter from 'gray-matter';
-import fs from 'fs';
-import { promisify } from 'util';
+import { Temporal } from "@js-temporal/polyfill";
+import BlogPreview from "components/BlogPreview";
+import Page from "components/Page";
+import ReadingContainer from "components/ReadingContainer";
+import fs from "fs";
+import matter from "gray-matter";
+import { GetStaticProps } from "next";
+import path from "path";
+import { promisify } from "util";
+
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
-import path from 'path';
-import { GetStaticProps } from 'next';
-import ReadingContainer from 'components/ReadingContainer';
-import { Temporal } from '@js-temporal/polyfill';
 
 type Props = {
 	blogs: {
@@ -20,12 +21,15 @@ type Props = {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-	const blogDirectory = path.join('pages', 'blog');
+	const blogDirectory = path.join("pages", "blog");
 	const paths = await readdir(blogDirectory);
 	const frontMatters = (await Promise.all(
 		paths
 			.filter((p) => /\.mdx$/.test(p))
-			.map(async (p) => ({ content: await readFile(path.join(blogDirectory, p), 'utf8'), path: p }))
+			.map(async (p) => ({
+				content: await readFile(path.join(blogDirectory, p), "utf8"),
+				path: p,
+			})),
 	).then((data) =>
 		data.map((d) => {
 			const frontMatter = matter(d.content).data;
@@ -35,9 +39,9 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 				intro: frontMatter.intro,
 				publishedAt: frontMatter.publishedAt,
 				__resourcePath: d.path,
-				__scan: {}
+				__scan: {},
 			};
-		})
+		}),
 	)) as BlogFrontMatterWithMetadata[];
 
 	const blogs = frontMatters
@@ -46,7 +50,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 				title: matter.title,
 				intro: matter.intro,
 				publishedAt: matter.publishedAt,
-				slug: matter.__resourcePath.replace(/^.*?([\w-]+)\.mdx$/, '$1')
+				slug: matter.__resourcePath.replace(/^.*?([\w-]+)\.mdx$/, "$1"),
 			};
 		})
 		.sort((a, b) => {
@@ -58,7 +62,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 		.map((blog) => ({ ...blog, publishedAt: blog.publishedAt.toString() }));
 
 	return {
-		props: { blogs }
+		props: { blogs },
 	};
 };
 

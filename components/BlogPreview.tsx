@@ -1,6 +1,6 @@
-import * as React from 'react';
-import Link from 'next/link';
-import { Temporal, Intl } from '@js-temporal/polyfill';
+import { Intl, Temporal } from "@js-temporal/polyfill";
+import Link from "next/link";
+import * as React from "react";
 
 interface BlogPreviewProps {
 	title: string;
@@ -14,10 +14,10 @@ interface BlogPreviewProps {
 const BlogPreview: React.FC<BlogPreviewProps> = ({ title, text, slug, publishedAt }) => {
 	const publishedAtTemporal = Temporal.ZonedDateTime.from(publishedAt);
 	const zonedPublishedAtTemporal = publishedAtTemporal.withTimeZone(Temporal.Now.timeZone());
-	const formattedPublishedAt = Intl.DateTimeFormat('en-US', {
-		month: 'short',
-		day: 'numeric',
-		year: 'numeric'
+	const formattedPublishedAt = Intl.DateTimeFormat("en-US", {
+		month: "short",
+		day: "numeric",
+		year: "numeric",
 	}).format(zonedPublishedAtTemporal);
 
 	return (
