@@ -18,9 +18,9 @@ const withMdxEnahcned = require('next-mdx-enhanced')({
 		process: (_mdxContent, frontMatter) => {
 			return {
 				...frontMatter,
-				title: frontMatter.title || 'Untitled',
-				intro: frontMatter.intro || 'No Intro Provided',
-				publishedAt: frontMatter.publishedAt || new Date().toISOString()
+				title: frontMatter.title,
+				intro: frontMatter.intro,
+				publishedAt: frontMatter.publishedAt
 			};
 		}
 		// phase: 'prebuild|loader|both'

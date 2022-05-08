@@ -2,13 +2,18 @@ import Page from 'components/Page';
 import { H1 } from 'components/mdx/other';
 import MDXProvider from 'components/mdx/Provider';
 import ReadingContainer from 'components/ReadingContainer';
-import dayjs from 'dayjs';
+import { Temporal, Intl } from '@js-temporal/polyfill';
 
 const BlogPostPage: React.FC<{ frontMatter: BlogFrontMatterWithMetadata }> = ({
 	frontMatter: { title, publishedAt },
 	children
 }) => {
-	const formattedPublishedAt = dayjs(publishedAt).format('MMM D, YY');
+	const publishedAtTemporal = Temporal.ZonedDateTime.from(publishedAt);
+	const zonedPublishedAtTemporal = publishedAtTemporal.withTimeZone(Temporal.Now.timeZone());
+	const formattedPublishedAt = Intl.DateTimeFormat('en-US', {
+		month: 'long',
+		day: 'numeric'
+	}).format(zonedPublishedAtTemporal);
 
 	return (
 		<Page title={`${title} - Blog - Amirata`}>

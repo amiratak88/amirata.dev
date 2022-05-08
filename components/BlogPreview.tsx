@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
-import dayjs from 'dayjs';
+import { Temporal, Intl } from '@js-temporal/polyfill';
 
 interface BlogPreviewProps {
 	title: string;
@@ -12,7 +12,13 @@ interface BlogPreviewProps {
 }
 
 const BlogPreview: React.FC<BlogPreviewProps> = ({ title, text, slug, publishedAt }) => {
-	const formattedPublishedAt = dayjs(publishedAt).format('MMM D, YY');
+	const publishedAtTemporal = Temporal.ZonedDateTime.from(publishedAt);
+	const zonedPublishedAtTemporal = publishedAtTemporal.withTimeZone(Temporal.Now.timeZone());
+	const formattedPublishedAt = Intl.DateTimeFormat('en-US', {
+		month: 'short',
+		day: 'numeric',
+		year: 'numeric'
+	}).format(zonedPublishedAtTemporal);
 
 	return (
 		<div>

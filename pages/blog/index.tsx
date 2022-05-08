@@ -8,6 +8,7 @@ const readFile = promisify(fs.readFile);
 import path from 'path';
 import { GetStaticProps } from 'next';
 import ReadingContainer from 'components/ReadingContainer';
+import { Temporal } from '@js-temporal/polyfill';
 
 type Props = {
 	blogs: {
@@ -30,9 +31,9 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 			const frontMatter = matter(d.content).data;
 			return {
 				...frontMatter,
-				title: frontMatter.title || 'Untitled',
-				intro: frontMatter.intro || 'No Intro Provided',
-				publishedAt: frontMatter.publishedAt || new Date().toISOString(),
+				title: frontMatter.title,
+				intro: frontMatter.intro,
+				publishedAt: frontMatter.publishedAt,
 				__resourcePath: d.path,
 				__scan: {}
 			};
@@ -44,11 +45,16 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 			return {
 				title: matter.title,
 				intro: matter.intro,
-				publishedAt: new Date(matter.publishedAt),
+				publishedAt: matter.publishedAt,
 				slug: matter.__resourcePath.replace(/^.*?([\w-]+)\.mdx$/, '$1')
 			};
 		})
-		.sort((a, b) => +b.publishedAt - +a.publishedAt)
+		.sort((a, b) => {
+			const publishedAtA = Temporal.ZonedDateTime.from(a.publishedAt);
+			const publishedAtB = Temporal.ZonedDateTime.from(b.publishedAt);
+
+			return Temporal.ZonedDateTime.compare(publishedAtA, publishedAtB);
+		})
 		.map((blog) => ({ ...blog, publishedAt: blog.publishedAt.toString() }));
 
 	return {
