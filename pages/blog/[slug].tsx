@@ -42,3 +42,5 @@ export const Blog: NextPage<Props> = ({ source }) => {
 		</Page>
 	);
 };
+
+export default Blog;
