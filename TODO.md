@@ -1,3 +1,5 @@
+- Timezone difference between SSG server and browser cause hydration issues
+  We should UTC for `publishedOn` or make it a state variable
 - TODO: Find a way to support "@trivago/prettier-plugin-sort-imports"
   Prettier doesn't support plugins. You can hack around it with the caveat that
   you can use only one plugin at a time. So I removed it in favor of "prettier-plugin-tailwindcss" for now.
