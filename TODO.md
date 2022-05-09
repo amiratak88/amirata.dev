@@ -4,8 +4,6 @@
   💡 Can we run prettier twice?
   See https://github.com/tailwindlabs/prettier-plugin-tailwindcss#compatibility-with-other-prettier-plugins
 - analytics
-- fix date on safari
-- package up withClassNameProp and withStyleProp
 - from blog post page
   - go back to index page
   - go to next blog
@@ -13,18 +11,11 @@
 - about
 - footer
 - reading-time
-- editedAt
 - MDX processing
-  - switch to next-mdx-remote
-  - validate front matter (e.g., "title" must be provided)
   - programtically supply publishedAt if not defined and write to the file
 - search
   - maybe look into algolia
 - SEO (research)
-- Note component:
-  - scan for !!!
-  - interpolate \* and \*\*
-  - key prop
 - tags
 - Fix publishedAt date timezone
 - code block:
@@ -39,8 +30,6 @@
 
 # Blog Ideas
 
-- advent of code
-- gitmoji program
 - remix + benchmark comparison
 
 # Cool libraries
