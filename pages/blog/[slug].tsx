@@ -35,7 +35,7 @@ export const Blog: NextPage<Props> = ({ source }) => {
 	return (
 		<Page title={`${title} - Blog - Amirata`}>
 			<ReadingContainer>
-				<p className="text-gray-500 text-sm text-right">{formattedPublishedAt}</p>
+				<p className="text-right text-sm text-gray-500">{formattedPublishedAt}</p>
 				<H1>{title}</H1>
 				<MDXProvider {...source} />
 			</ReadingContainer>

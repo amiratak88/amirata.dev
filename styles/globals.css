@@ -16,7 +16,7 @@
 body {
 	padding: 0;
 	margin: 0;
-	@apply font-sans text-gray-300 bg-gray-900;
+	@apply bg-gray-900 font-sans text-gray-300;
 }
 
 a {
@@ -30,10 +30,10 @@ a {
 
 /* MDX lists */
 .mdx-ul {
-	@apply text-lg ml-6 list-disc list-inside mb-7;
+	@apply ml-6 mb-7 list-inside list-disc text-lg;
 }
 .mdx-ul .mdx-ul {
-	@apply list-circle mb-0;
+	@apply mb-0 list-circle;
 }
 .mdx-ul .mdx-ul .mdx-ul {
 	@apply list-square;

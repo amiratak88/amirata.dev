@@ -7,7 +7,7 @@ import withClassName from "utils/with-class-name";
 
 const InlineCode: React.FCWithChildren = ({ children }) => (
 	<code
-		className="rounded-md px-1 mx-1 font-mono text-base"
+		className="mx-1 rounded-md px-1 font-mono text-base"
 		style={{ backgroundColor: "#d7b34829", color: "#ffef00d6", border: "2px solid #d7b348bd" }}
 	>
 		{children}
@@ -18,7 +18,7 @@ const _CopyButton: React.FC<{ onClick: MouseEventHandler<HTMLButtonElement> }> =
 	return (
 		<button
 			aria-label="Copy the code to clipboard"
-			className={`rounded-lg invisible group-hover:visible border-gray-700 hover:border-gray-500 border-3 px-2 py-1 text-gray-700 hover:text-gray-500`}
+			className={`invisible rounded-lg border-3 border-gray-700 px-2 py-1 text-gray-700 hover:border-gray-500 hover:text-gray-500 group-hover:visible`}
 			onClick={onClick}
 		>
 			<FontAwesomeIcon icon="copy" size="lg" />
@@ -68,12 +68,12 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, language, shouldShowLin
 			language={language as PrismLanguage}
 		>
 			{({ className, tokens, getLineProps, getTokenProps }) => (
-				<code className={`${className} overflow-auto whitespace-pre block group`} ref={ref}>
+				<code className={`${className} group block overflow-auto whitespace-pre`} ref={ref}>
 					<div
 						role="alert"
-						className={`font-sans bg-green-900 text-green-400 border-2 border-green-400 absolute text-center p-1.5 rounded-md transition-all duration-300 ${
-							showCopySuccess ? "top-3 opacity-100 visible" : "top-5 opacity-0 invisible"
-						} left-1/2 transform -translate-x-1/2`}
+						className={`absolute rounded-md border-2 border-green-400 bg-green-900 p-1.5 text-center font-sans text-green-400 transition-all duration-300 ${
+							showCopySuccess ? "visible top-3 opacity-100" : "invisible top-5 opacity-0"
+						} left-1/2 -translate-x-1/2 transform`}
 					>
 						Copied!
 					</div>
@@ -82,10 +82,10 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, language, shouldShowLin
 						<div
 							key={i}
 							{...getLineProps({ line, key: i })}
-							className="prism-line table-row code-line"
+							className="prism-line code-line table-row"
 						>
 							{shouldShowLineNumbers && (
-								<span className="text-gray-700 table-cell text-right pr-4 select-none">
+								<span className="table-cell select-none pr-4 text-right text-gray-700">
 									{i + 1}
 								</span>
 							)}
@@ -125,7 +125,7 @@ export const Code: React.FCWithChildren<CodeProps> = ({
 
 export const Pre: React.FCWithChildren = ({ children }) => {
 	return (
-		<div className="bg-black rounded-lg p-3 overflow-hidden mb-7 whitespace-pre relative">
+		<div className="relative mb-7 overflow-hidden whitespace-pre rounded-lg bg-black p-3">
 			{children}
 		</div>
 	);

@@ -1,3 +1,8 @@
+- TODO: Find a way to support "@trivago/prettier-plugin-sort-imports"
+  Prettier doesn't support plugins. You can hack around it with the caveat that
+  you can use only one plugin at a time. So I removed it in favor of "prettier-plugin-tailwindcss" for now.
+  💡 Can we run prettier twice?
+  See https://github.com/tailwindlabs/prettier-plugin-tailwindcss#compatibility-with-other-prettier-plugins
 - analytics
 - fix date on safari
 - package up withClassNameProp and withStyleProp

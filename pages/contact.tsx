@@ -7,7 +7,7 @@ const Contact: NextPage = () => {
 	return (
 		<Page title="Contact - Amirata">
 			<ReadingContainer>
-				<h1 className="text-3xl font-bold mb-12">Contact</h1>
+				<h1 className="mb-12 text-3xl font-bold">Contact</h1>
 				<p className="text-lg text-indigo-400">Coming soon</p>
 			</ReadingContainer>
 		</Page>
