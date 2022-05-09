@@ -21,7 +21,7 @@ const Blog: NextPage<Props> = ({ postPreviews }) => {
 	return (
 		<Page title="Recent Blogs - Amirata">
 			<ReadingContainer>
-				<h1 className="text-3xl font-bold mb-12">Recent Blogs</h1>
+				<h1 className="mb-12 text-3xl font-bold">Recent Blogs</h1>
 				<div className="space-y-8">
 					{postPreviews.map((preview) => (
 						<BlogPostPreview key={preview.slug} {...preview} />

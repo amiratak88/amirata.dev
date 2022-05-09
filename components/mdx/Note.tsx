@@ -23,13 +23,13 @@ const Note: React.FCWithChildren<Props> = ({ children, type = "info" }) => {
 
 	return (
 		<aside
-			className="p-6 mb-7 border-3 rounded-md relative lg:border-r-0 lg:border-t-0 lg:border-b-0 lg:rounded-l-none"
+			className="relative mb-7 rounded-md border-3 p-6 lg:rounded-l-none lg:border-r-0 lg:border-t-0 lg:border-b-0"
 			style={{
 				backgroundColor,
 				borderColor,
 			}}
 		>
-			<div className="absolute top-2 -left-0.5 transform -translate-x-1/2 -translate-y-1/2 rounded-full p5 bg-main hidden lg:block">
+			<div className="p5 bg-main absolute top-2 -left-0.5 hidden -translate-x-1/2 -translate-y-1/2 transform rounded-full lg:block">
 				<FontAwesomeIcon
 					icon={iconMap[type]}
 					size="3x"

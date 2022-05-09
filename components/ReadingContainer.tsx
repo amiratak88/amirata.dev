@@ -1,6 +1,6 @@
 const ReadingContainer: React.FCWithChildren = ({ children }) => {
 	return (
-		<div className="w-full mx-auto pb-20 px-3" style={{ maxWidth: "83ch" /* three alphabets */ }}>
+		<div className="mx-auto w-full px-3 pb-20" style={{ maxWidth: "83ch" /* three alphabets */ }}>
 			{children}
 		</div>
 	);

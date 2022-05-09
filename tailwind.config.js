@@ -1,13 +1,10 @@
-// @ts-nocheck TODO: fix the types after upgrading to v3
+const defaultTheme = /** @type {import('utils/types').TailwindCSSDefaultTheme} */ (
+	require("tailwindcss/defaultTheme")
+);
 
-const defaultTheme = require("tailwindcss/defaultTheme");
-
+/** @type {import('tailwindcss/tailwind-config').TailwindConfig} */
 module.exports = {
-	future: {
-		// removeDeprecatedGapUtilities: true,
-		// purgeLayersByDefault: true,
-	},
-	purge: ["./pages/**/*.tsx", "./pages/**/*.mdx", "./components/**/*.tsx"],
+	content: ["./{pages,components}/**/*.tsx", "./posts/**/*.mdx"],
 	theme: {
 		extend: {
 			fontFamily: { sans: ['"IBM Plex Sans"', ...defaultTheme.fontFamily.sans] },
@@ -16,9 +13,4 @@ module.exports = {
 			listStyleType: { circle: "circle", square: "square" },
 		},
 	},
-	variants: {
-		margin: ({ after }) => after(["first", "last"]),
-		visibility: ({ after }) => after(["group-hover"]),
-	},
-	plugins: [],
 };
