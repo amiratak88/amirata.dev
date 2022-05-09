@@ -3,7 +3,7 @@ import copyToClipboard from "copy-to-clipboard";
 import Highlight, { defaultProps, Language as PrismLanguage } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/nightOwl";
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
-import withClassName from "utils/withClassName";
+import withClassName from "utils/with-class-name";
 
 const InlineCode: React.FCWithChildren = ({ children }) => (
 	<code
@@ -79,7 +79,11 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, language, shouldShowLin
 					</div>
 					<CopyButton className="absolute top-3 right-3" onClick={onCopyButtonClick} />
 					{tokens.map((line, i) => (
-						<div {...getLineProps({ line, key: i })} className="prism-line table-row code-line">
+						<div
+							key={i}
+							{...getLineProps({ line, key: i })}
+							className="prism-line table-row code-line"
+						>
 							{shouldShowLineNumbers && (
 								<span className="text-gray-700 table-cell text-right pr-4 select-none">
 									{i + 1}
@@ -87,7 +91,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, language, shouldShowLin
 							)}
 							<span className="table-cell">
 								{line.map((token, key) => (
-									<span {...getTokenProps({ token, key })} />
+									<span key={key} {...getTokenProps({ token, key })} />
 								))}
 							</span>
 						</div>
@@ -98,11 +102,11 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, language, shouldShowLin
 	);
 };
 
-type CodeProps = {
+interface CodeProps {
 	children: string;
 	className?: string;
 	nonumber?: boolean;
-};
+}
 
 export const Code: React.FCWithChildren<CodeProps> = ({
 	children,

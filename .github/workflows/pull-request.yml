@@ -12,3 +12,5 @@ jobs:
         run: yarn prettier:check
       - name: Check validity of types
         run: yarn type-check
+      - name: Lint
+        run: yarn lint

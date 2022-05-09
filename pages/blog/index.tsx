@@ -1,13 +1,13 @@
-import { GetStaticProps } from "next";
+import { GetStaticProps, NextPage } from "next/types";
 import { listSortedPostPreviews, PostPreview } from "utils/blog";
 
 import BlogPostPreview from "components/BlogPostPreview";
 import Page from "components/Page";
 import ReadingContainer from "components/ReadingContainer";
 
-type Props = {
+interface Props {
 	postPreviews: PostPreview[];
-};
+}
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
 	const postPreviews = await listSortedPostPreviews();
@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 	};
 };
 
-const Blog = ({ postPreviews }: Props) => {
+const Blog: NextPage<Props> = ({ postPreviews }) => {
 	return (
 		<Page title="Recent Blogs - Amirata">
 			<ReadingContainer>

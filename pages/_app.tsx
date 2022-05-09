@@ -2,7 +2,7 @@ import "misc/fontawesome-init";
 import { AppProps } from "next/app";
 import "styles/globals.css";
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps): React.ReactNode {
 	return <Component {...pageProps} />;
 }
 

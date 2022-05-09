@@ -23,7 +23,7 @@ export const A: React.FCWithChildren<{ href: string }> = ({ children, href }) =>
 	const className = "text-yellow-400 hover:underline";
 
 	return isExternal ? (
-		<a href={href} className={className} target="_blank">
+		<a href={href} className={className} target="_blank" rel="noreferrer">
 			{children}
 		</a>
 	) : (

@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from "next/types";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next/types";
 import { listSlugs, serialize, SerializeResult } from "utils/blog";
 import { formatZonedDateTime, zonedDateTimeFromISOString } from "utils/temporal";
 
@@ -27,7 +27,7 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 	};
 };
 
-export default function Blog({ source }: Props) {
+export const Blog: NextPage<Props> = ({ source }) => {
 	const { title, publishedAt } = source.frontmatter;
 	const publishedAtZonedDateTime = zonedDateTimeFromISOString(publishedAt);
 	const formattedPublishedAt = formatZonedDateTime(publishedAtZonedDateTime, "A");
@@ -41,4 +41,6 @@ export default function Blog({ source }: Props) {
 			</ReadingContainer>
 		</Page>
 	);
-}
+};
+
+export default Blog;

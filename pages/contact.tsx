@@ -1,7 +1,9 @@
+import { NextPage } from "next/types";
+
 import Page from "components/Page";
 import ReadingContainer from "components/ReadingContainer";
 
-const Contact = () => {
+const Contact: NextPage = () => {
 	return (
 		<Page title="Contact - Amirata">
 			<ReadingContainer>
