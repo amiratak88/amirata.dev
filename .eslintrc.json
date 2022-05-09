@@ -1,18 +1,12 @@
 {
-  "root": true,
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-      "project": ["tsconfig.json"]
-    },
-  "plugins": [
-    "@typescript-eslint"
-  ],
-  "extends": [
-    "next/core-web-vitals",
-    "standard-with-typescript",
-    "prettier"
-  ],
-  "rules": {
-    "@typescript-eslint/strict-boolean-expressions": "off"
-  }
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": ["tsconfig.json"]
+	},
+	"plugins": ["@typescript-eslint"],
+	"extends": ["next/core-web-vitals", "standard-with-typescript", "prettier"],
+	"rules": {
+		"@typescript-eslint/strict-boolean-expressions": "off"
+	}
 }

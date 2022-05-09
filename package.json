@@ -6,10 +6,9 @@
 		"build": "next build",
 		"console": "esr scripts/console.ts",
 		"dev": "next dev",
-		"lint": "next lint",
-		"lint:test": "eslint --format ./utils/eslint-formatter.js .",
-		"prettier:check": "prettier --check --ignore-path ./.gitignore .",
-		"prettier:write": "prettier --write --ignore-path ./.gitignore .",
+		"lint": "eslint --format utils/eslint-formatter.js --ignore-path .gitignore .",
+		"prettier:check": "prettier --check --ignore-path .gitignore .",
+		"prettier:write": "prettier --write --ignore-path .gitignore .",
 		"start": "next start",
 		"type-check": "tsc"
 	},
