@@ -25,14 +25,14 @@
 		"prism-react-renderer": "^1.1.1",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
-		"validator": "^13.7.0",
+		"validator": "^13.9.0",
 		"zod": "^3.15.1"
 	},
 	"devDependencies": {
 		"@types/node": "^14.11.1",
 		"@types/react": "^18.0.9",
 		"@types/react-dom": "^18.0.3",
-		"@types/validator": "^13.7.2",
+		"@types/validator": "^13.7.12",
 		"@typescript-eslint/eslint-plugin": "^5.22.0",
 		"@typescript-eslint/parser": "^5.22.0",
 		"@typescript-eslint/utils": "^5.22.0",
