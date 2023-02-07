@@ -16,7 +16,6 @@ const PostFrontmatterSchema = z
 			// checking for `T` in the string along with `strictSeparator: true`
 			// to ensure it's a datetime and not a date
 			(value) =>
-				// @ts-expect-error `strictSeparator` is a thing
 				validator.isISO8601(value, { strict: true, strictSeparator: true }) && value.includes("T"),
 			"String must be a valid ISO8601 datetime",
 		),

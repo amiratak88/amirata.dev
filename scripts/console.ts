@@ -14,11 +14,13 @@ r.context.schema = z
 	.object({
 		title: z.string().nonempty(),
 		intro: z.string().nonempty().optional(),
-		publishedAt: z.string().refine(
-			(value) =>
-				// @ts-expect-error `strictSeparator` is a thing
-				validator.isISO8601(value, { strict: true, strictSeparator: true }) && value.includes("T"),
-		),
+		publishedAt: z
+			.string()
+			.refine(
+				(value) =>
+					validator.isISO8601(value, { strict: true, strictSeparator: true }) &&
+					value.includes("T"),
+			),
 	})
 	.strict();
 r.context.Temporal = Temporal;
