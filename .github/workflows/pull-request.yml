@@ -11,7 +11,7 @@ jobs:
         with:
           node-version-file: .node-version
       - name: Install dependencies
-        run: yarn
+        run: yarn install --immutable --immutable-cache --check-cache
       - name: Check validity of code formatting
         run: yarn prettier:check
       - name: Check validity of types
